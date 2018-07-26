@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhengtd.dao.RecruitMapper">
+
+    <insert id="addRec" parameterType="Recruit">
+        INSERT INTO T_RECRUIT (R_id,R_job,R_salary,R_worktime,R_workplace,
+        R_treatment,R_jobrequirement,R_other)
+        VALUES (RECRUIT_SEQ.nextval,#{r_id},#{r_job},#{r_salary},#{r_workTime},
+        #{r_workPlace},#{r_treatment},#{r_jobRequirement},#{r_other})
+    </insert>
+
+    <delete id="deleteRec" parameterType="Recruit">
+        DELETE FROM T_RECRUIT WHERE R_id=#{r_id}
+    </delete>
+
+    <select id="getAllRec" resultType="com.zhengtd.model.Recruit">
+        SELECT * FROM T_RECRUIT
+    </select>
+    <select id="getPageRec" resultType="com.zhengtd.model.Recruit"></select>
+</mapper>
