@@ -3,24 +3,28 @@
 <mapper namespace="com.zhengtd.dao.VitaeMapper">
 
     <insert id="addVitae" parameterType="Vitae">
-        INSERT INTO T_VITAE (CV_id, CV_uid, CV_name, CV_birthday, CV_sex, CV_address,
-        CV_phone, CV_major, CV_email, CV_school, CV_able, CV_other, CV_hometown, CV_experience)
-        VALUES (VITAE_SEQ.nextval,#{cv_uid},#{cv_name},#{cv_birthday},#{cv_sex},#{cv_address},#{cv_phone},
-        #{cv_major},#{cv_email},#{cv_school},#{cv_able},#{cv_other},#{cv_hometown},#{cv_experience})
+        INSERT INTO T_VITAE (CV_ID, CV_UID, CV_NAME, CV_BIRTHDAY, CV_SEX, CV_ADDRESS,
+        CV_PHONE, CV_MAJOR, CV_EMAIL, CV_SCHOOL, CV_ABLE, CV_OTHER, CV_HOMETOWN, CV_EXPERIENCE)
+        VALUES (VITAE_SEQ.nextval, #{cv_uid}, #{cv_name}, #{cv_birthday}, #{cv_sex}, #{cv_address}, #{cv_phone},
+        #{cv_major}, #{cv_email}, #{cv_school}, #{cv_able}, #{cv_other}, #{cv_hometown}, #{cv_experience})
     </insert>
 
     <update id="updateVitae" parameterType="Vitae">
-        UPDATE T_VITAE SET CV_name=#{cv_name},cv_birthday=#{cv_birthday},cv_sex=#{cv_sex},cv_address=#{cv_address},
-        cv_phone=#{cv_phone},cv_major=#{cv_major},cv_email=#{cv_email},cv_school=#{cv_school},cv_able=#{cv_able},
-        cv_other=#{cv_other},cv_hometown=#{cv_hometown},cv_experience=#{cv_experience} where cv_id=#{cv_id}
+        UPDATE T_VITAE SET CV_NAME=#{cv_name},CV_BIRTHDAY=#{cv_birthday},CV_SEX=#{cv_sex},CV_ADDRESS=#{cv_address},
+        CV_PHONE=#{cv_phone},CV_MAJOR=#{cv_major},CV_EMAIL=#{cv_email},CV_SCHOOL=#{cv_school},CV_ABLE=#{cv_able},
+        CV_OTHER=#{cv_other},CV_HOMETOWN=#{cv_hometown},CV_EXPERIENCE=#{cv_experience} where CV_ID=#{cv_id}
     </update>
 
     <delete id="deleteVitae" parameterType="Vitae">
-        DELETE FROM T_VITAE WHERE CV_id=#{cv_id}
+        DELETE FROM T_VITAE WHERE CV_ID=#{cv_id}
     </delete>
 
-    <select id="getByUidVitae" resultType="com.zhengtd.model.Vitae">
-        SELECT * FROM T_VITAE WHERE CV_uid=#{cv_uid}
+    <select id="getByUidVitae" parameterType="Vitae" resultType="com.zhengtd.model.Vitae">
+        SELECT * FROM T_VITAE WHERE CV_UID=#{cv_uid}
+    </select>
+
+    <select id="getByIdVC" parameterType="Vitae" resultType="com.zhengtd.model.Vitae">
+        SELECT * FROM T_VITAE WHERE CV_ID=#{cv_id}
     </select>
 
 </mapper>

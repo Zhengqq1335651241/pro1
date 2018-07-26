@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.zhengtd.model.User" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
@@ -16,6 +17,21 @@
     <base href="<%=basePath%>"/>
     <title>用户界面</title>
     <style>
+        #b1{
+            background: url(img/UserWin.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            color: white;
+        }
+        #d2{
+            position: relative;
+            color: white;
+            float:right;
+            right: auto;
+            top: 40px;
+        }
         ul {
             list-style-type: none;
             margin: 0;
@@ -37,45 +53,178 @@
         }
 
         li a:hover {
-            background-color: #111;
+            background-color: darkgrey;
         }
+        table{
+            font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+            width:100%;
+            border-collapse:collapse;
+            collapse: 1px;
+            margin: auto;
+            color: honeydew;
+            text-align: center;
+        }
+        table td{
+            border: 1px solid skyblue;
+            color: honeydew;
+            height: auto;
+        }
+
     </style>
-
 </head>
-<body>
+<body id="b1">
 
 <div>
-    <fieldset>
-        <legend>欢迎用户:${sessionScope.user.u_name}!</legend>
-        <ul>
-            <li><a href="getVitaeDetail">个人简历</a></li>
-            <li><a href="goodDetail?currentPage=1">#</a></li>
-            <li><a href="#">#</a> </li>
-            <li><a href="#">#</a> </li>
-            <li><a href="#">退出登陆</a></li>
-        </ul>
-    </fieldset>
-</div>
 
-<div>
-    <fieldset>
-        <legend>添加一份简历吧</legend>
-        <form method="post" action="addCV">
-            姓&nbsp;&nbsp;名:<input type="text" name="cv_name"><br/>
-            出生日期:<input type="text" name="cv_birthday"><br/>
-            性&nbsp;&nbsp;别:<input type="text" name="cv_sex"><br/>
-            常&nbsp;住&nbsp;地:<input type="text" name="cv_address"><br/>
-            籍&nbsp;&nbsp;贯:<input type="text" name="cv_hometown"><br/>
-            电&nbsp;&nbsp;话:<input type="text" name="cv_phone"><br/>
-            邮&nbsp;&nbsp;箱:<input type="text" name="cv_email"><br/>
-            毕业学校:<input type="text" name="cv_school"><br/>
-            专&nbsp;&nbsp;业:<input type="text" name="cv_major"><br/>
-            工作经历:<input type="text" name="cv_experience"><br/>
-            技&nbsp;&nbsp;能:<input type="text" name="cv_able"><br/>
-            其&nbsp;&nbsp;他:<input type="text" name="cv_other"><br/>
-            <input type="submit" value="确认提交">
-        </form>
-    </fieldset>
+    <div>
+        <fieldset>
+            <legend>欢迎用户:${sessionScope.user.u_name}!</legend>
+            <ul>
+                <li><a href="getVitaeDetail">个人简历</a></li>
+                <li><a href="goodDetail?currentPage=1">#</a></li>
+                <li><a href="#">退出登陆</a></li>
+            </ul>
+        </fieldset>
+    </div>
+
+    <div style="height: 400px;width: 450px;font-size: 25px ;color: white;">
+        <fieldset>
+            <legend>添加一份简历吧</legend>
+            <form method="post" action="addVC">
+                <table style="text-align: center">
+                    <tr>
+                        <td>
+                            <lable>姓名:</lable>
+                        </td>
+                        <td>
+                            <input type="text" name="cv_name"><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <lable>出生日期:</lable>
+                        </td>
+                        <td>
+                            <input type="date" name="cv_birthday"
+                                   value="2018-07-26"><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>性别:</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="cv_sex" value="男" checked>男
+                            <input type="radio" name="cv_sex" value="女">女<br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>常住地:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="cv_address"><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>籍贯:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="cv_hometown"><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>电话:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="cv_phone"><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>邮箱:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="cv_email"><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>毕业学校:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="cv_school"><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>专业:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="cv_major"><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>工作经历:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="cv_experience"><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>技能:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="cv_able"><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>其他:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="cv_other"><br/>
+                        </td>
+                    </tr>
+                </table>
+
+                <input type="submit" value="确认提交">
+            </form>
+        </fieldset>
+    </div>
+
+    <div id="d2">
+        <table>
+            <caption>招聘信息</caption>
+            <tr>
+                <td>id</td>
+                <td>职位</td>
+                <td>薪资</td>
+                <td>工作时间</td>
+                <td>工作地点</td>
+                <td>福利待遇</td>
+                <td>要求</td>
+                <td>其他</td>
+            </tr>
+            <c:forEach items="${sessionScope.recruit}" var="recruit">
+                <tr>
+                    <td>${recruit.r_id}</td>
+                    <td>${recruit.r_job}</td>
+                    <td>${recruit.r_salary}</td>
+                    <td>${recruit.r_workTime}</td>
+                    <td>${recruit.r_workPlace}</td>
+                    <td>${recruit.r_treatment}</td>
+                    <td>${recruit.r_jobRequirement}</td>
+                    <td>${recruit.r_other}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+
 </div>
 
 

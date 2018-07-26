@@ -17,7 +17,7 @@
     <title>注册页面</title>
     <style>
         #b1{
-            background: url(../../images/ShouYe.jpg) no-repeat center center fixed;
+            background: url(img/zhuce.jpg) no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -33,21 +33,25 @@
     </style>
 </head>
 <body id="b1">
+<div >
+   <img src="">
+    <div id="d1">
+        <fieldset>
+            <legend>欢迎注册</legend>
+            <form action="register" method="post">
+                账户:<input type="text" name="u_name"><br/>
+                密码:<input type="text" name="u_pass"><br/>
+                <input type="submit" value="注册">
 
-<div id="d1">
-    <fieldset>
-        <legend>欢迎注册</legend>
-        <form action="register" method="post">
-            账户:<input type="text" name="u_name"><br/>
-            密码:<input type="text" name="u_pass"><br/>
-            <input type="submit" value="注册">
+                <a href="#">
+                    <input type=button value="登陆" onclick="window.location.href('#')">
+                </a>
+            </form>
 
-            <a href="#">
-                <input type=button value="登陆" onclick="window.location.href('#')">
-            </a>
-        </form>
+        </fieldset>
+    </div>
 
-    </fieldset>
+
 </div>
 
 </body>

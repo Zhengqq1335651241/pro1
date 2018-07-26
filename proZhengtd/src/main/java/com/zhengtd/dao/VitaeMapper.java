@@ -3,6 +3,8 @@ package com.zhengtd.dao;
 import com.zhengtd.model.Vitae;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/7/25.
  */
@@ -11,5 +13,6 @@ public interface VitaeMapper {
     boolean addVitae(Vitae vitae);
     boolean deleteVitae(Vitae vitae);
     boolean updateVitae(Vitae vitae);
-    Vitae getByUidVitae(Vitae vitae);
+    List<Vitae> getByUidVitae(Vitae vitae);
+    Vitae getByIdVC(Vitae vitae);
 }

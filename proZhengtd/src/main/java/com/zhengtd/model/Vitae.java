@@ -41,6 +41,10 @@ public class Vitae implements Serializable {
     public Vitae() {
     }
 
+    public Vitae(int cv_id) {
+        this.cv_id = cv_id;
+    }
+
     public int getCv_id() {
         return cv_id;
     }

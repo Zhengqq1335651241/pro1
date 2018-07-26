@@ -6,6 +6,7 @@ import com.zhengtd.service.VitaeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/7/25.
@@ -31,7 +32,12 @@ public class VitaeServiceImpl implements VitaeService {
     }
 
     @Override
-    public Vitae getByUidVitae(Vitae vitae) {
+    public List<Vitae> getByUidVitae(Vitae vitae) {
         return vitaeMapper.getByUidVitae(vitae);
+    }
+
+    @Override
+    public Vitae getByIdVC(Vitae vitae) {
+        return vitaeMapper.getByIdVC(vitae);
     }
 }

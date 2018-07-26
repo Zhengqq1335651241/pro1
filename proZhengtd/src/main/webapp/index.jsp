@@ -60,7 +60,7 @@
             <input type="submit" value="登陆">
         </form>
         <a href="addUser">
-            <input type=button value="登陆" onclick="window.location.href('register')">
+            <input type=button value="注册" onclick="window.location.href('register')">
         </a>
     </fieldset>
 </div>
