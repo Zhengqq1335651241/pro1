@@ -95,6 +95,13 @@
             </tr>
         </c:forEach>
 
+        <tr>
+            <td colspan="14">
+                <c:forEach begin="1" end="${sessionScope.totalPages}" var="PAGESIZE">
+                    <a href="getVitaeDetail?currentPage=${PAGESIZE}">${PAGESIZE}</a>
+                </c:forEach>
+            </td>
+        </tr>
     </table>
 </body>
 </html>
