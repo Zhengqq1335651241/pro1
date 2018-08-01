@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/7/25.
@@ -39,5 +40,10 @@ public class VitaeServiceImpl implements VitaeService {
     @Override
     public Vitae getByIdVC(Vitae vitae) {
         return vitaeMapper.getByIdVC(vitae);
+    }
+
+    @Override
+    public List<Vitae> getPage(Map<String, Object> data) {
+        return vitaeMapper.getPage(data);
     }
 }

@@ -108,6 +108,15 @@
                 </tr>
                 <tr>
                     <td>
+                        <label>学历:</label>
+                    </td>
+                    <td>
+                        <input type="text" name="cv_eduBackground" value="${sessionScope.vi.cv_eduBackground}"><br/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
                         <label>毕业学校:</label>
                     </td>
                     <td>
@@ -147,10 +156,14 @@
                     </td>
                 </tr>
             </table>
-
+            <input type="hidden" name="cv_id" value="${sessionScope.vi.cv_id}"><br/>
             <input type="submit" value="确认提交">
         </form>
     </fieldset>
+
+    <p style="color: red; size: 30px">
+        ${requestScope.str1}
+    </p>
 </div>
 
 </body>

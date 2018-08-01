@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhengtd.dao.EmpMapper">
+
+    <insert id="addEmp" parameterType="Emp">
+        INSERT INTO T_EMP (E_EID, E_ENAME, E_EPASS, E_SEX, E_ADDRESS, E_EDUBACKGROUND,
+        E_BIRTHDAY, E_HOMETOWN, E_IDCARD, E_PHONE, E_EMAIL, E_WORKAGE, E_MAJOR,
+        E_GRADUATESCHOOL,E_DEPTID,E_PID)
+        VALUES (EMP_SEQ.nextval,#{e_eName},#{e_ePass},#{e_sex},#{e_address},#{e_position},#{e_eduBackground},#{e_birthday},
+        #{e_hometown},#{e_IDCard},#{e_phone},#{e_email},#{e_workAge},#{e_major},#{e_graduateSchool},=#{e_deptId},=#{e_pId})
+    </insert>
+
+    <update id="updateEmp" parameterType="Emp">
+        UPDATE T_EMP SET E_ENAME=#{e_eName},E_EPASS=#{e_ePass}, E_SEX=#{e_sex}, E_ADDRESS=#{e_address},
+        E_EDUBACKGROUND=#{e_eduBackground}, E_BIRTHDAY=#{e_birthday}, E_HOMETOWN=#{e_hometown},
+        E_IDCARD=#{e_IDCard}, E_PHONE=#{e_phone}, E_EMAIL=#{e_email}, E_WORKAGE=#{e_workAge},
+        E_MAJOR=#{e_major},E_GRADUATESCHOOL=#{e_graduateSchool},E_DEPTID=#{e_deptId},E_PID=#{e_pId}
+        where E_EID=#{e_eid}
+    </update>
+
+    <delete id="deleteEmp" parameterType="Emp">
+        DELETE FROM T_EMP WHERE E_EID=#{e_eid}
+    </delete>
+
+    <select id="getEmpById" resultType="com.zhengtd.model.Emp">
+        SELECT * FROM T_EMP WHERE E_EID=#{e_eid}
+    </select>
+
+    <select id="getEmpByDept" resultType="com.zhengtd.model.Emp">
+        SELECT * FROM T_EMP WHERE E_DEPTID=#{e_deptId}
+    </select>
+
+    <select id="getEmpByPost" resultType="com.zhengtd.model.Emp">
+        SELECT * FROM T_EMP WHERE E_PID=#{e_pId}
+    </select>
+</mapper>

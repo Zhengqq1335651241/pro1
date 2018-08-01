@@ -3,11 +3,16 @@
 <mapper namespace="com.zhengtd.dao.RecruitMapper">
 
     <insert id="addRec" parameterType="Recruit">
-        INSERT INTO T_RECRUIT (R_id,R_job,R_salary,R_worktime,R_workplace,
-        R_treatment,R_jobrequirement,R_other)
-        VALUES (RECRUIT_SEQ.nextval,#{r_id},#{r_job},#{r_salary},#{r_workTime},
-        #{r_workPlace},#{r_treatment},#{r_jobRequirement},#{r_other})
+        INSERT INTO T_RECRUIT (R_id,R_job,R_salary,R_worktime,R_WORKPLACE,R_jobrequirement,R_other,R_STATE)
+        VALUES (RECRUIT_SEQ.nextval,#{r_job},#{r_salary},#{r_workTime},
+        #{r_workPlace},#{r_jobRequirement},#{r_other},#{r_state})
     </insert>
+
+    <update id="updateRec">
+        UPDATE T_RECRUIT SET R_JOB=#{r_job},r_salary=#{r_salary},r_workTime=#{r_workTime},
+        r_workPlace=#{r_workPlace},r_jobRequirement=#{r_jobRequirement},
+        r_other=#{r_other} where r_id=#{r_id}
+    </update>
 
     <delete id="deleteRec" parameterType="Recruit">
         DELETE FROM T_RECRUIT WHERE R_id=#{r_id}
@@ -16,5 +21,19 @@
     <select id="getAllRec" resultType="com.zhengtd.model.Recruit">
         SELECT * FROM T_RECRUIT
     </select>
-    <select id="getPageRec" resultType="com.zhengtd.model.Recruit"></select>
+
+    <select id="getPageRec" resultType="com.zhengtd.model.Recruit">
+        SELECT * FROM (
+        SELECT rownum rn,u.* FROM T_RECRUIT u) gd
+        Where gd.rn BETWEEN #{currentPage} AND #{pageSize}
+    </select>
+
+    <select id="getByState" resultType="com.zhengtd.model.Recruit">
+        SELECT * FROM T_RECRUIT WHERE R_STATE=#{r_state}
+    </select>
+
+    <select id="getRecById" resultType="com.zhengtd.model.Recruit">
+        SELECT * FROM T_RECRUIT WHERE R_ID=#{r_id}
+    </select>
+
 </mapper>

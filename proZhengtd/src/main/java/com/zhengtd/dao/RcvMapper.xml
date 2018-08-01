@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhengtd.dao.RcvMapper">
+
+    <insert id="addRcv" parameterType="Rcv">
+        INSERT INTO T_RCV (RV_ID, RV_RID, RV_CVID, RV_TIME, RV_STATE, RV_UID,RV_JOB,RV_UNAME,RV_INVITE)
+        VALUES (RCV_SEQ.nextval,#{rv_rid},#{rv_cvId},#{rv_time},#{rv_state},#{rv_uid},#{rv_job},#{rv_uname},#{rv_invite})
+    </insert>
+
+    <update id="updateRcv" parameterType="Rcv">
+        UPDATE T_RCV SET RV_RID=#{rv_rid},rv_cvId=#{rv_cvId},rv_time=#{rv_time},rv_invite=#{rv_invite},
+        RV_STATE=#{rv_state},RV_UID =#{rv_uid},RV_JOB=#{rv_job},RV_UNAME=#{rv_uname} where RV_ID=#{rv_id}
+    </update>
+
+    <delete id="deleteRcv" parameterType="Rcv">
+        DELETE FROM T_RCV WHERE RV_ID=#{rv_id}
+    </delete>
+
+    <select id="getByUIDAllRcv" resultType="com.zhengtd.model.Rcv">
+        SELECT * FROM T_RCV WHERE RV_UID=#{rv_uid}
+    </select>
+
+    <select id="getPage" resultType="com.zhengtd.model.Rcv">
+        SELECT * FROM (
+        SELECT rownum rn,u.* FROM T_RCV u WHERE RV_STATE=#{state}) gd
+        Where gd.rn BETWEEN #{currentPage} AND #{pageSize}
+    </select>
+
+    <select id="getAllRcv" resultType="com.zhengtd.model.Rcv">
+        SELECT * FROM T_RCV
+    </select>
+    <select id="getRcvById" resultType="com.zhengtd.model.Rcv">
+        SELECT * FROM T_RCV WHERE RV_ID=#{rv_id}
+    </select>
+    <select id="getByInvite" resultType="com.zhengtd.model.Rcv">
+        SELECT * FROM T_RCV WHERE RV_INVITE=#{rv_invite}
+    </select>
+
+    <select id="getByState" resultType="com.zhengtd.model.Rcv">
+        SELECT * FROM T_RCV WHERE RV_STATE=#{rv_state}
+    </select>
+
+
+</mapper>

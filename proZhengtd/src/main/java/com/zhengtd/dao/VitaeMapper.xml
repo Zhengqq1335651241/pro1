@@ -4,15 +4,18 @@
 
     <insert id="addVitae" parameterType="Vitae">
         INSERT INTO T_VITAE (CV_ID, CV_UID, CV_NAME, CV_BIRTHDAY, CV_SEX, CV_ADDRESS,
-        CV_PHONE, CV_MAJOR, CV_EMAIL, CV_SCHOOL, CV_ABLE, CV_OTHER, CV_HOMETOWN, CV_EXPERIENCE)
+        CV_PHONE, CV_MAJOR, CV_EMAIL, CV_SCHOOL, CV_ABLE, CV_OTHER, CV_HOMETOWN, CV_EXPERIENCE,
+        CV_STATE,CV_EDUBACKGROUND)
         VALUES (VITAE_SEQ.nextval, #{cv_uid}, #{cv_name}, #{cv_birthday}, #{cv_sex}, #{cv_address}, #{cv_phone},
-        #{cv_major}, #{cv_email}, #{cv_school}, #{cv_able}, #{cv_other}, #{cv_hometown}, #{cv_experience})
+        #{cv_major}, #{cv_email}, #{cv_school}, #{cv_able}, #{cv_other}, #{cv_hometown}, #{cv_experience},
+        #{cv_state},#{cv_eduBackground})
     </insert>
 
     <update id="updateVitae" parameterType="Vitae">
-        UPDATE T_VITAE SET CV_NAME=#{cv_name},CV_BIRTHDAY=#{cv_birthday},CV_SEX=#{cv_sex},CV_ADDRESS=#{cv_address},
-        CV_PHONE=#{cv_phone},CV_MAJOR=#{cv_major},CV_EMAIL=#{cv_email},CV_SCHOOL=#{cv_school},CV_ABLE=#{cv_able},
-        CV_OTHER=#{cv_other},CV_HOMETOWN=#{cv_hometown},CV_EXPERIENCE=#{cv_experience} where CV_ID=#{cv_id}
+        UPDATE T_VITAE SET CV_NAME=#{cv_name},cv_birthday=#{cv_birthday},cv_sex=#{cv_sex},cv_address=#{cv_address},
+        cv_phone=#{cv_phone},cv_major=#{cv_major},cv_email=#{cv_email},cv_school=#{cv_school},cv_able=#{cv_able},
+        cv_other=#{cv_other},cv_hometown=#{cv_hometown},
+        cv_experience=#{cv_experience},cv_eduBackground=#{cv_eduBackground} where cv_id=#{cv_id}
     </update>
 
     <delete id="deleteVitae" parameterType="Vitae">
@@ -20,11 +23,16 @@
     </delete>
 
     <select id="getByUidVitae" parameterType="Vitae" resultType="com.zhengtd.model.Vitae">
-        SELECT * FROM T_VITAE WHERE CV_UID=#{cv_uid}
+        SELECT * FROM T_VITAE WHERE CV_UID=#{cv_uid} and cv_state=#{cv_state}
     </select>
 
     <select id="getByIdVC" parameterType="Vitae" resultType="com.zhengtd.model.Vitae">
         SELECT * FROM T_VITAE WHERE CV_ID=#{cv_id}
+    </select>
+    <select id="getPage" resultType="com.zhengtd.model.Vitae">
+        SELECT * FROM (
+        SELECT rownum rn,u.* FROM T_VITAE u WHERE CV_STATE=#{state}) gd
+        Where gd.rn BETWEEN #{currentPage} AND #{pageSize}
     </select>
 
 </mapper>

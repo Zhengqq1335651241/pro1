@@ -4,6 +4,7 @@ import com.zhengtd.model.Vitae;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/7/25.
@@ -15,4 +16,5 @@ public interface VitaeMapper {
     boolean updateVitae(Vitae vitae);
     List<Vitae> getByUidVitae(Vitae vitae);
     Vitae getByIdVC(Vitae vitae);
+    List<Vitae> getPage(Map<String,Object> data);
 }

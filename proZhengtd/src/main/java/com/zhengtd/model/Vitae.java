@@ -20,6 +20,8 @@ public class Vitae implements Serializable {
     private String cv_hometown;
     private String cv_experience;
     private String cv_other;
+    private int cv_state;
+    private String cv_eduBackground;
 
     public Vitae(int cv_id, int cv_uid, String cv_name, String cv_birthday, String cv_sex, String cv_address, String cv_phone, String cv_major, String cv_email, String cv_school, String cv_able, String cv_hometown, String cv_experience, String cv_other) {
         this.cv_id = cv_id;
@@ -43,6 +45,22 @@ public class Vitae implements Serializable {
 
     public Vitae(int cv_id) {
         this.cv_id = cv_id;
+    }
+
+    public int getCv_state() {
+        return cv_state;
+    }
+
+    public String getCv_eduBackground() {
+        return cv_eduBackground;
+    }
+
+    public void setCv_eduBackground(String cv_eduBackground) {
+        this.cv_eduBackground = cv_eduBackground;
+    }
+
+    public void setCv_state(int cv_state) {
+        this.cv_state = cv_state;
     }
 
     public int getCv_id() {

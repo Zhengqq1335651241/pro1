@@ -225,6 +225,12 @@
       <version>2.2.1</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20141113</version>
+    </dependency>
+
     <!--Jackson文件-->
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
@@ -261,6 +267,16 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.7.5</version>
+    </dependency>
+      <dependency>
+          <groupId>org.mortbay.jetty</groupId>
+          <artifactId>jetty-util</artifactId>
+          <version>6.1.25</version>
+      </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty-util</artifactId>
+      <version>6.1.25</version>
     </dependency>
   </dependencies>
 

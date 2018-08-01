@@ -11,22 +11,11 @@ public class Recruit implements Serializable{
     private int r_salary;
     private String r_workTime;
     private String r_workPlace;
-    private String r_treatment;
     private String r_jobRequirement;
     private String r_other;
+    private int r_state;
 
     public Recruit() {
-    }
-
-    public Recruit(int r_id, String r_job, int r_salary, String r_workTime, String r_workPlace, String r_treatment, String r_jobRequirement, String r_other) {
-        this.r_id = r_id;
-        this.r_job = r_job;
-        this.r_salary = r_salary;
-        this.r_workTime = r_workTime;
-        this.r_workPlace = r_workPlace;
-        this.r_treatment = r_treatment;
-        this.r_jobRequirement = r_jobRequirement;
-        this.r_other = r_other;
     }
 
     @Override
@@ -37,10 +26,22 @@ public class Recruit implements Serializable{
                 ", r_salary=" + r_salary +
                 ", r_workTime='" + r_workTime + '\'' +
                 ", r_workPlace='" + r_workPlace + '\'' +
-                ", r_treatment='" + r_treatment + '\'' +
                 ", r_jobRequirement='" + r_jobRequirement + '\'' +
                 ", r_other='" + r_other + '\'' +
+                ", r_state=" + r_state +
                 '}';
+    }
+
+    public Recruit(int r_id) {
+        this.r_id = r_id;
+    }
+
+    public int getR_state() {
+        return r_state;
+    }
+
+    public void setR_state(int r_state) {
+        this.r_state = r_state;
     }
 
     public int getR_id() {
@@ -81,14 +82,6 @@ public class Recruit implements Serializable{
 
     public void setR_workPlace(String r_workPlace) {
         this.r_workPlace = r_workPlace;
-    }
-
-    public String getR_treatment() {
-        return r_treatment;
-    }
-
-    public void setR_treatment(String r_treatment) {
-        this.r_treatment = r_treatment;
     }
 
     public String getR_jobRequirement() {

@@ -16,7 +16,7 @@
     <title>首页</title>
     <style>
         #b1{
-            background: url(images/ShouYe.jpg) no-repeat center center fixed;
+            background: url(img/ShouYe.jpg) no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -47,23 +47,53 @@
             color: white;
             height: auto;
         }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            /*padding: 14px 16px;*/
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: darkgrey;
+        }
     </style>
 </head>
 <body id="b1">
 
+
 <div id="d1">
     <fieldset>
         <legend>欢迎登陆</legend>
+        <ul>
+            <li><a href="#">员工入口</a></li>
+            <li><a href="adminPass">管理员入口</a></li>
+        </ul><br/>
+
         <form action="login" method="post">
             账户:<input type="text" name="u_name"><br/>
             密码:<input type="text" name="u_pass"><br/>
             <input type="submit" value="登陆">
+            <a href="addUser">
+                <input type=button value="注册" onclick="window.location.href('register')">
+            </a>
         </form>
-        <a href="addUser">
-            <input type=button value="注册" onclick="window.location.href('register')">
-        </a>
     </fieldset>
 </div>
+
 <div id="d2">
     <table>
         <tr>

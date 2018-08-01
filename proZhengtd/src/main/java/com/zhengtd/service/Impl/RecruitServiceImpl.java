@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/7/25.
@@ -32,7 +33,22 @@ public class RecruitServiceImpl implements RecruitService {
     }
 
     @Override
-    public List<Recruit> getPageRec() {
-        return recruitMapper.getPageRec();
+    public List<Recruit> getPageRec(Map<String,Object> data) {
+        return recruitMapper.getPageRec(data);
+    }
+
+    @Override
+    public List<Recruit> getByState(Recruit recruit) {
+        return recruitMapper.getByState(recruit);
+    }
+
+    @Override
+    public Recruit getRecById(Recruit recruit) {
+        return recruitMapper.getRecById(recruit);
+    }
+
+    @Override
+    public boolean updateRec(Recruit recruit) {
+        return recruitMapper.updateRec(recruit);
     }
 }

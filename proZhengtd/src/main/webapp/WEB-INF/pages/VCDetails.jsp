@@ -58,6 +58,7 @@
             <td>电话</td>
             <td>邮箱</td>
             <td>专业</td>
+            <td>学历</td>
             <td>毕业学校</td>
             <td>能力</td>
             <td>履历</td>
@@ -76,6 +77,7 @@
                 <td>${vitaeList.cv_phone}</td>
                 <td>${vitaeList.cv_email}</td>
                 <td>${vitaeList.cv_major}</td>
+                <td>${vitaeList.cv_eduBackground}</td>
                 <td>${vitaeList.cv_school}</td>
                 <td>${vitaeList.cv_able}</td>
                 <td>${vitaeList.cv_experience}</td>
@@ -96,7 +98,7 @@
         </c:forEach>
 
         <tr>
-            <td colspan="14">
+            <td colspan="15">
                 <c:forEach begin="1" end="${sessionScope.totalPages}" var="PAGESIZE">
                     <a href="getVitaeDetail?currentPage=${PAGESIZE}">${PAGESIZE}</a>
                 </c:forEach>
