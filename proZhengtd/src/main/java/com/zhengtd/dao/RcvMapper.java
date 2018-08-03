@@ -20,4 +20,5 @@ public interface RcvMapper {
     Rcv getRcvById(Rcv rcv);
     List<Rcv> getByInvite(Rcv rcv);
     List<Rcv> getByState(Rcv rcv);
+    List<Rcv> getPageUser(Map<String,Object> data);
 }

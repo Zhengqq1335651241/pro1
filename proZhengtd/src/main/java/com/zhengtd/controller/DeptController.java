@@ -33,12 +33,12 @@ public class DeptController {
     @Resource
     private EmpService empService;
 
-    @RequestMapping("/goDeptPostPage")
+    @RequestMapping("/goDeptPostPage")//进入部门职位页面
     public String goDeptPostPage()throws Exception{
         return "DeptPost";
     }
 
-    @RequestMapping("/lookDeptPost")
+    @RequestMapping("/lookDeptPost")//进入查看部门职位页面
     public String lookDeptPost(HttpServletRequest request)throws Exception{
         List<Position> positions1 = positionService.findAllPosition();
         List<Dept> depts1 = deptService.findAllDept();
@@ -47,7 +47,7 @@ public class DeptController {
         return "lookDeptPost";
     }
 
-    @RequestMapping("/getPosition")
+    @RequestMapping("/getPosition")//获取部门对应的职位
     @ResponseBody
     public Object getPosition(int d_id){
         Position position = new Position();
@@ -56,7 +56,7 @@ public class DeptController {
         return t_positions;
     }
 
-    @RequestMapping("/addDept")
+    @RequestMapping("/addDept")//添加部门
     public String addDept(HttpServletRequest request)throws Exception{
         String d_name = request.getParameter("d_name");
         String d_loc = request.getParameter("d_loc");
@@ -75,7 +75,7 @@ public class DeptController {
         }
     }
 
-    @RequestMapping("/addPosition")
+    @RequestMapping("/addPosition")//添加职位
     public String addPosition(HttpServletRequest request)throws Exception{
         String p_name = request.getParameter("p_name");
         String p_deptName = request.getParameter("p_deptName");
@@ -100,7 +100,7 @@ public class DeptController {
 
 
 
-    @RequestMapping("/deleteDept")
+    @RequestMapping("/deleteDept")//删除部门
     public String deleteDept(HttpServletRequest request)throws Exception{
         int d_id = Integer.parseInt(request.getParameter("d_id"));
         Emp emp = new Emp();emp.setE_deptId(d_id);
@@ -117,24 +117,9 @@ public class DeptController {
         }
     }
 
-    @RequestMapping("/updateDept")
-    public String updateDept(HttpServletRequest request)throws Exception{
-        int d_id = Integer.parseInt(request.getParameter("d_id"));
-        String d_name = request.getParameter("d_name");
-        String d_loc = request.getParameter("d_loc");
-        Dept dept = new Dept();
-        dept.setD_id(d_id);dept.setD_name(d_name);dept.setD_loc(d_loc);
 
-        if(deptService.updateDept(dept)){
-            request.setAttribute("updateDept1","部门修改成功");
-            return lookDeptPost(request);
-        }else{
-            request.setAttribute("updateDept2","部门修改失败");
-            return lookDeptPost(request);
-        }
-    }
 
-    @RequestMapping("/deletePosition")
+    @RequestMapping("/deletePosition")//删除职位
     public String deletePosition(HttpServletRequest request)throws Exception{
         int p_id = Integer.parseInt(request.getParameter("p_id"));
         System.out.println(p_id);
@@ -148,6 +133,67 @@ public class DeptController {
         }else{
             request.setAttribute("deletePosition2","职位删除失败");
             return lookDeptPost(request);
+        }
+    }
+
+    @RequestMapping("/adminLookPosition")//管理员查看职位
+    public String adminLookPosition(HttpServletRequest request)throws Exception{
+        int d_id = Integer.parseInt(request.getParameter("d_id"));
+        Position position = new Position();position.setP_deptId(d_id);
+        List<Position> positions2 = positionService.getByPDeptId(position);
+        System.out.println(positions2);
+        if(positions2.size()!=0){
+            request.setAttribute("positions2",positions2);
+            return "adminLookPositionPage";
+        }else{
+            request.setAttribute("str1","此部门没有职位");
+            return lookDeptPost(request);
+        }
+    }
+
+    @RequestMapping("/adminLookEmp")//管理员查看部门员工
+    public String adminLookEmp(HttpServletRequest request)throws Exception{
+        int d_id = Integer.parseInt(request.getParameter("d_id"));
+        Emp emp = new Emp();emp.setE_deptId(d_id);
+        List<Emp> emp1 = empService.getEmpByDept(emp);
+        if(emp1.size()!=0){
+            request.setAttribute("emp1",emp1);
+            return "adminLookEmpPage";
+        }else{
+            request.setAttribute("str1","此部门没有员工");
+            return lookDeptPost(request);
+        }
+    }
+
+    @RequestMapping("/updateDeptPage")//进入修改页面
+    public String updateDeptPage(HttpServletRequest request)throws Exception{
+        int d_id = Integer.parseInt(request.getParameter("d_id"));
+        Dept dept2 = deptService.getDeptByID(new Dept(d_id));
+        Position position = new Position();
+        position.setP_deptId(d_id);
+        List<Position> positions2 = positionService.getByPDeptId(position);
+        System.out.println(dept2);
+        System.out.println(positions2);
+        request.setAttribute("dept2",dept2);
+        request.setAttribute("positions2",positions2);
+        return "updateDeptPage";
+    }
+
+    @RequestMapping("/updateDept")//修改部门
+    public String updateDept(HttpServletRequest request)throws Exception{
+        int d_id = Integer.parseInt(request.getParameter("d_id"));
+        String d_name = request.getParameter("d_name");
+        String d_loc = request.getParameter("d_loc");
+        String d_addTime = request.getParameter("d_addTime");
+        Dept dept = new Dept();dept.setD_addTime(d_addTime);
+        dept.setD_id(d_id);dept.setD_name(d_name);dept.setD_loc(d_loc);
+
+        if(deptService.updateDept(dept)){
+            request.setAttribute("updateDept1","部门修改成功");
+            return updateDeptPage(request);
+        }else{
+            request.setAttribute("updateDept1","部门修改失败");
+            return updateDeptPage(request);
         }
     }
 

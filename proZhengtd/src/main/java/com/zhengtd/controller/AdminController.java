@@ -1,13 +1,7 @@
 package com.zhengtd.controller;
 
-import com.zhengtd.model.Admin;
-import com.zhengtd.model.Rcv;
-import com.zhengtd.model.User;
-import com.zhengtd.model.Vitae;
-import com.zhengtd.service.AdminService;
-import com.zhengtd.service.RcvService;
-import com.zhengtd.service.RecruitService;
-import com.zhengtd.service.VitaeService;
+import com.zhengtd.model.*;
+import com.zhengtd.service.*;
 import com.zhengtd.utils.DoGetPages;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +28,10 @@ public class AdminController {//管理员
     private VitaeService vitaeService;
     @Resource
     private RecruitService recruitService;
+    @Resource
+    private PositionService positionService;
+    @Resource
+    private EmpService empService;
 
     @RequestMapping("/adminLogin")//管理员登陆
     public String AdminLogin(Admin admin, HttpSession session) throws Exception{
@@ -132,4 +130,7 @@ public class AdminController {//管理员
         session.setAttribute("rcv1",rcv1);
         return "successHire";
     }
+
+
+
 }

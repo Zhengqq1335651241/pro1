@@ -26,6 +26,8 @@
         Where gd.rn BETWEEN #{currentPage} AND #{pageSize}
     </select>
 
+
+
     <select id="getAllRcv" resultType="com.zhengtd.model.Rcv">
         SELECT * FROM T_RCV
     </select>
@@ -38,6 +40,12 @@
 
     <select id="getByState" resultType="com.zhengtd.model.Rcv">
         SELECT * FROM T_RCV WHERE RV_STATE=#{rv_state}
+    </select>
+
+    <select id="getPageUser" resultType="com.zhengtd.model.Rcv">
+        SELECT * FROM (
+        SELECT rownum rn,u.* FROM T_RCV u WHERE RV_UID=#{uid}) gd
+        Where gd.rn BETWEEN #{currentPage} AND #{pageSize}
     </select>
 
 

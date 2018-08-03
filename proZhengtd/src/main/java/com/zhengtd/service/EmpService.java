@@ -14,4 +14,6 @@ public interface EmpService {
     Emp getEmpById(Emp emp);
     List<Emp> getEmpByDept(Emp emp);
     List<Emp> getEmpByPost(Emp emp);
+    Emp getByLoginEmp(Emp emp);
+    List<Emp> getEmpByState(Emp emp);
 }

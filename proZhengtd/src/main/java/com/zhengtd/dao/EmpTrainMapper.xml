@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhengtd.dao.EmpTrainMapper">
+
+    <parameterMap type="EmpTrain" id="parameterEmpTrainMap">
+        <parameter property="emp_id"/>
+        <parameter property="train_id"/>
+    </parameterMap>
+
+    <insert id="addEmpTrain">
+        INSERT INTO T_EMPTRAIN (ET_ID, EMP_ID, TRAIN_ID)
+        VALUES(EMPTRAIN_SEQ.nextval,#{emp_id},#{train_id})
+    </insert>
+
+    <delete id="deleteEmpTrain">
+        DELETE FROM T_EMPTRAIN WHERE ET_ID=#{et_id}
+    </delete>
+
+    <select id="getAllEmpTrain" resultType="com.zhengtd.model.EmpTrain">
+        SELECT * FROM T_EMPTRAIN
+    </select>
+
+
+
+    <!-- 根据一个员工ID,查看这个员工下的所有培训 -->
+    <resultMap type="Emp" id="resultEmpMap_2">
+        <id property="e_eid" column="e_eid"/>
+        <result property="e_eName" column="e_eName"/>
+        <result property="e_ePass" column="e_ePass"/>
+        <result property="e_birthday" column="e_birthday"/>
+        <result property="e_sex" column="e_sex"/>
+        <result property="e_address" column="e_address"/>
+        <result property="e_eduBackground" column="e_eduBackground"/>
+        <result property="e_hometown" column="e_hometown"/>
+        <result property="e_phone" column="e_phone"/>
+        <result property="e_email" column="e_email"/>
+        <result property="e_major" column="e_major"/>
+        <result property="e_graduateSchool" column="e_graduateSchool"/>
+        <result property="e_deptId" column="e_deptId"/>
+        <result property="e_pId" column="e_pId"/>
+        <result property="e_state" column="e_state"/>
+        <result property="e_hireDate" column="e_hireDate"/>
+    </resultMap>
+
+
+    <select id="getEmpByTrainId" resultMap="resultEmpMap_2" parameterType="int">
+        SELECT e.*,et.train_id
+        FROM T_EMP e,T_EMPTRAIN et
+        WHERE e.eid = et.emp_id AND et.train_id=#{train_id}
+    </select>
+
+    <!-- 根据一个培训ID,查看这个用户所对应的员工-->
+    <resultMap type="Train" id="resultTrainMap_2">
+        <id property="t_id" column="t_id"/>
+        <result property="t_topic" column="e_eName"/>
+        <result property="t_content" column="e_ePass"/>
+        <result property="t_place" column="e_birthday"/>
+        <result property="t_startTime" column="e_sex"/>
+        <result property="t_endTime" column="e_address"/>
+        <result property="t_push" column="e_eduBackground"/>
+    </resultMap>
+
+    <select id="getTrainByEmpId" resultMap="resultTrainMap_2" parameterType="int">
+        SELECT t.*,et.emp_id
+        FROM T_TRAIN t,T_EMPTRAIN et
+        WHERE t.tid = et.train_id AND et.emp_id=#{emp_id}
+    </select>
+
+
+</mapper>

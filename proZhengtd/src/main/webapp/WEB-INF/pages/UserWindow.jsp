@@ -216,7 +216,7 @@
             <legend>欢迎用户:${sessionScope.user.u_name}!</legend>
             <ul>
                 <li><a href="getVitaeDetail?currentPage=1">个人简历</a></li>
-                <li><a href="getDeliveryDetail?currentPage=1">投递详情</a></li>
+                <li><a href="goDeliveryDetail">投递详情</a></li>
                 <li><a href="#">退出登陆</a></li>
             </ul>
         </fieldset>

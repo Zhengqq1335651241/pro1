@@ -61,4 +61,9 @@ public class RcvServiceImpl implements RcvService {
     public List<Rcv> getByState(Rcv rcv) {
         return rcvMapper.getByState(rcv);
     }
+
+    @Override
+    public List<Rcv> getPageUser(Map<String, Object> data) {
+        return rcvMapper.getPageUser(data);
+    }
 }

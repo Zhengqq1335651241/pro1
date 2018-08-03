@@ -3,10 +3,18 @@
 <mapper namespace="com.zhengtd.dao.AdminMapper">
 
     <insert id="addAdmin">
-
+      INSERT INTO T_ADMIN (A_ID, A_NAME, A_PASS)
+      VALUES (ADMIN_SEQ.nextval,#{a_name},#{a_pass})
     </insert>
-    <update id="updateAdmin"></update>
-    <delete id="deleteAdmin"></delete>
+
+    <update id="updateAdmin">
+        UPDATE T_ADMIN SET A_NAME=#{a_name},a_pass=#{a_pass}
+        where a_id=#{a_id}
+    </update>
+
+    <delete id="deleteAdmin">
+        DELETE FROM T_ADMIN WHERE A_ID=#{a_id}
+    </delete>
 
     <select id="getByID" resultType="com.zhengtd.model.Admin">
         SELECT * FROM T_ADMIN WHERE A_ID=#{a_id}

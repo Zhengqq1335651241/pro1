@@ -45,4 +45,14 @@ public class EmpServiceImpl implements EmpService {
     public List<Emp> getEmpByPost(Emp emp) {
         return empMapper.getEmpByPost(emp);
     }
+
+    @Override
+    public Emp getByLoginEmp(Emp emp) {
+        return empMapper.getByLoginEmp(emp);
+    }
+
+    @Override
+    public List<Emp> getEmpByState(Emp emp) {
+        return empMapper.getEmpByState(emp);
+    }
 }

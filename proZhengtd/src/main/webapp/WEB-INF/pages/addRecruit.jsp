@@ -25,6 +25,93 @@
             text-align: center;
         }
     </style>
+
+    <script src="js/jquery.js" ></script>
+    <script>
+        $(function () {
+            $("#n1").blur(function () {
+                var p = $("#n1").val();
+                var reg = /\S/;
+                if(reg.test(p)){
+                    $("#n1").css('border','2px solid green');
+                    $("#nq").removeAttr("disabled");
+                }else {
+                    $("#n1").css('border','1px solid red');
+                    $("#nq").attr("disabled","a")
+                }
+            })
+        });
+
+        $(function () {
+            $("#n2").blur(function () {
+                var p = $("#n2").val();
+                var reg = /^[0-9]*$/;
+                if(reg.test(p)){
+                    $("#n2").css('border','2px solid green');
+                    $("#nq").removeAttr("disabled");
+                }else {
+                    $("#n2").css('border','1px solid red');
+                    $("#nq").attr("disabled","a")
+                }
+            })
+        });
+
+        $(function () {
+            $("#n3").blur(function () {
+                var p = $("#n3").val();
+                var reg = /\S/;
+                if(reg.test(p)){
+                    $("#n3").css('border','2px solid green');
+                    $("#nq").removeAttr("disabled");
+                }else {
+                    $("#n3").css('border','1px solid red');
+                    $("#nq").attr("disabled","a")
+                }
+            })
+        });
+
+        $(function () {
+            $("#n4").blur(function () {
+                var p = $("#n4").val();
+                var reg = /\S/;
+                if(reg.test(p)){
+                    $("#n4").css('border','2px solid green');
+                    $("#nq").removeAttr("disabled");
+                }else {
+                    $("#n4").css('border','1px solid red');
+                    $("#nq").attr("disabled","a")
+                }
+            })
+        });
+
+        $(function () {
+            $("#n4").blur(function () {
+                var p = $("#n4").val();
+                var reg = /\S/;
+                if(reg.test(p)){
+                    $("#n4").css('border','2px solid green');
+                    $("#nq").removeAttr("disabled");
+                }else {
+                    $("#n4").css('border','1px solid red');
+                    $("#nq").attr("disabled","a")
+                }
+            })
+        });
+
+        $(function () {
+            $("#n6").blur(function () {
+                var p = $("#n6").val();
+                var reg = /\S/;
+                if(reg.test(p)){
+                    $("#n6").css('border','2px solid green');
+                    $("#nq").removeAttr("disabled");
+                }else {
+                    $("#n6").css('border','1px solid red');
+                    $("#nq").attr("disabled","a")
+                }
+            })
+        });
+    </script>
 </head>
 <body id="b1">
 
@@ -46,7 +133,7 @@
                         <lable>薪资:</lable>
                     </td>
                     <td>
-                        <input type="text" name="r_salary"><br/>
+                        <input type="text" id="n2" name="r_salary"><br/>
                     </td>
                 </tr>
                 <tr>
@@ -55,7 +142,7 @@
                     </td>
                     <td>
                         <input type="text" name="r_workTime"
-                               value="做五休一早九晚五"><br/>
+                               id="n3" ><br/>
                     </td>
                 </tr>
                 <tr>
@@ -63,7 +150,7 @@
                         <label>工作地方:</label>
                     </td>
                     <td>
-                        <input type="text" id="n2"
+                        <input type="text" id="n4"
                                name="r_workPlace"><br/>
                     </td>
                 </tr>
@@ -73,7 +160,7 @@
                         <label>要求:</label>
                     </td>
                     <td>
-                        <input type="text" id="n3"
+                        <input type="text" id="n5"
                                name="r_jobRequirement"><br/>
                     </td>
                 </tr>
@@ -82,12 +169,12 @@
                         <label>其他:</label>
                     </td>
                     <td>
-                        <input type="text" id="n9" name="r_other"><br/>
+                        <input type="text" id="n6" name="r_other"><br/>
                     </td>
                 </tr>
             </table>
 
-            <input id="n10" type="submit" value="确认提交">
+            <input id="nq" type="submit" value="确认提交">
         </form>
     </fieldset>
 </div>

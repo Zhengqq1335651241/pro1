@@ -46,7 +46,7 @@
 <a href="AdminHomePage"><font color="red">《返回首页</font></a>
 <br/><br/><br/><br/>
 
-<div style="height: 500px;width: 400px;font-size: 25px ;color: white;">
+<div style="height: 80%;width: 80%;font-size: 25px ;color: white;">
     <fieldset>
         <legend>部门</legend>
         <form action="updateDept" method="post">
@@ -57,6 +57,8 @@
                     <td>部门名称</td>
                     <td>部门地址</td>
                     <td>创建时间</td>
+                    <td>部门职位</td>
+                    <td>部门员工</td>
                     <td>修改</td>
                     <td>删除</td>
                 </tr>
@@ -66,17 +68,25 @@
                             ${depts1.d_id}
                         </td>
                         <td>
-                            <input name="d_name" value="${depts1.d_name}">
+                            ${depts1.d_name}
                         </td>
                         <td>
-                            <input name="d_loc" value="${depts1.d_loc}">
+                            ${depts1.d_loc}
                         </td>
                         <td>
                             ${depts1.d_addTime}
                         </td>
+
                         <td>
-                            <input name="d_id" type="hidden" value="${depts1.d_id}">
-                            <input type="submit" value="修改">
+                            <a href="adminLookPosition?d_id=${depts1.d_id}">查看部门职位</a>
+                        </td>
+
+                        <td>
+                            <a href="adminLookEmp?d_id=${depts1.d_id}">查看部门员工</a>
+                        </td>
+
+                        <td>
+                            <a href="updateDeptPage?d_id=${depts1.d_id}">修改</a>
                         </td>
 
                         <td>
@@ -95,45 +105,46 @@
                 ${requestScope.updateDept2}
                 ${requestScope.deleteDept1}
                 ${requestScope.deleteDept2}
+            ${requestScope.str1}
         </p>
 
     </fieldset>
 
-    <fieldset>
-        <legend>职位</legend>
-        <form action="updatePosition" method="post">
-        <table style="text-align: center">
-            <tr>
-                <td>职位名称</td>
-                <td>创建时间</td>
-                <td>操作</td>
-            </tr>
-            <c:forEach items="${requestScope.positions1}" var="positions1">
-                <tr>
-                    <td>
-                          <input name="p_name" value="${positions1.p_name}">
-                    </td>
-                    <td>${positions1.p_addTime}</td>
-                    <td>
-                        <input name="p_id" type="hidden" value="${positions1.p_id}">
-                        <input type="submit" value="修改">
-                    <form action="deletePosition" method="post">
-                        <input name="p_id" type="hidden" value="${positions1.p_id}">
-                        <input type="submit" value="删除">
-                    </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-        </form>
+    <%--<fieldset>--%>
+        <%--<legend>职位</legend>--%>
+        <%--<form action="updatePosition" method="post">--%>
+        <%--<table style="text-align: center">--%>
+            <%--<tr>--%>
+                <%--<td>职位名称</td>--%>
+                <%--<td>创建时间</td>--%>
+                <%--<td>操作</td>--%>
+            <%--</tr>--%>
+            <%--<c:forEach items="${requestScope.positions1}" var="positions1">--%>
+                <%--<tr>--%>
+                    <%--<td>--%>
+                          <%--<input name="p_name" value="${positions1.p_name}">--%>
+                    <%--</td>--%>
+                    <%--<td>${positions1.p_addTime}</td>--%>
+                    <%--<td>--%>
+                        <%--<input name="p_id" type="hidden" value="${positions1.p_id}">--%>
+                        <%--<input type="submit" value="修改">--%>
+                    <%--<form action="deletePosition" method="post">--%>
+                        <%--<input name="p_id" type="hidden" value="${positions1.p_id}">--%>
+                        <%--<input type="submit" value="删除">--%>
+                    <%--</form>--%>
+                    <%--</td>--%>
+                <%--</tr>--%>
+            <%--</c:forEach>--%>
+        <%--</table>--%>
+        <%--</form>--%>
 
-        <p style="color:red; size: 30px">
-                ${requestScope.updatePosition1}
-                ${requestScope.updateposition2}
-                ${requestScope.deletePosition1}
-                ${requestScope.deleteposition2}
-        </p>
-    </fieldset>
+        <%--<p style="color:red; size: 30px">--%>
+                <%--${requestScope.updatePosition1}--%>
+                <%--${requestScope.updateposition2}--%>
+                <%--${requestScope.deletePosition1}--%>
+                <%--${requestScope.deleteposition2}--%>
+        <%--</p>--%>
+    <%--</fieldset>--%>
 </div>
 
 </body>

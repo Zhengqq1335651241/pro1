@@ -97,12 +97,12 @@
 
                 <tr>
                     <td>
-                        员工姓名:
+                        员工账号:
                     </td>
 
                     <td>
                         <input type="text" name="e_eName"
-                               value="${sessionScope.vitae3.cv_name}">
+                               value="${sessionScope.vitae3.cv_email}">
                     </td>
                 </tr>
 
@@ -182,15 +182,6 @@
 
                 <tr>
                     <td>
-                        身份证:
-                    </td>
-                    <td>
-                        <input type="text" name="e_IDCard">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
                         电话:
                     </td>
                     <td>
@@ -207,14 +198,6 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <td>
-                        工龄:
-                    </td>
-                    <td>
-                        <input type="text" name="e_workAge">
-                    </td>
-                </tr>
 
                 <tr>
                     <td>
@@ -231,6 +214,20 @@
                     </td>
                     <td>
                         <input type="text" name="e_graduateSchool" value="${sessionScope.vitae3.cv_school}">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>入职时间:</td>
+                    <td>
+                        <input type="date" name="e_hireDate">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>岗位状态:</td>
+                    <td>
+                        <input name="e_state" type="text" value="1">
                     </td>
                 </tr>
 

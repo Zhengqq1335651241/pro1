@@ -71,6 +71,37 @@
             background-color: darkgrey;
         }
     </style>
+
+    <script src="js/jquery.js" ></script>
+    <script>
+        $(function () {
+            $("#n1").blur(function () {
+                var p = $("#n1").val();
+                var reg = /^[a-zA-Z][a-zA-Z0-9_]{4,15}$/;
+                if(reg.test(p)){
+                    $("#n1").css('border','2px solid green');
+                    $("#nq").removeAttr("disabled");
+                }else {
+                    $("#n1").css('border','1px solid red');
+                    $("#nq").attr("disabled","a")
+                }
+            })
+        });
+        $(function () {
+            $("#n2").blur(function () {
+                var p = $("#n2").val();
+                var reg = /^[a-zA-Z]\w{5,17}$/;
+                if(reg.test(p)){
+                    $("#n2").css('border','2px solid green');
+                    $("#nq").removeAttr("disabled");
+                }else {
+                    $("#n2").css('border','1px solid red');
+                    $("#nq").attr("disabled","a")
+                }
+            })
+        });
+
+    </script>
 </head>
 <body id="b1">
 
@@ -79,14 +110,16 @@
     <fieldset>
         <legend>欢迎登陆</legend>
         <ul>
-            <li><a href="#">员工入口</a></li>
+            <li><a href="empPass">员工入口</a></li>
             <li><a href="adminPass">管理员入口</a></li>
         </ul><br/>
 
         <form action="login" method="post">
-            账户:<input type="text" name="u_name"><br/>
-            密码:<input type="text" name="u_pass"><br/>
-            <input type="submit" value="登陆">
+            账户:<input type="text" name="u_name"
+                      id="n1" placeholder="字母开头,5-16字节"><br/>
+            密码:<input type="password" name="u_pass"
+                      id="n2" placeholder="字母开头，6~18之间"><br/>
+            <input type="submit" value="登陆" id="nq">
             <a href="addUser">
                 <input type=button value="注册" onclick="window.location.href('register')">
             </a>

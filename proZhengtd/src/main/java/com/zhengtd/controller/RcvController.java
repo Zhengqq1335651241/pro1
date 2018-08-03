@@ -93,6 +93,31 @@ public class RcvController {//投递简历
         }
     }
 
+    @RequestMapping("/readUserVC")//用户查看已读
+    public String goUserReadVC(int currentPage,HttpSession session,
+                           HttpServletRequest request)throws Exception{
+        User user = (User) session.getAttribute("user");
+        Rcv rcv = new Rcv();
+        int uid = user.getU_id();
+        rcv.setRv_uid(uid);
+        List<Rcv> rcvs = rcvService.getByUIDAllRcv(rcv);
+        final int PAGESIZE = 5;
+        int totalRows = rcvs.size();
+        int totalPages = DoGetPages.getTotalPages(totalRows,PAGESIZE);//总页数
+        Map<String,Object> data = new HashMap<>();
+        data.put("currentPage",(currentPage-1)*PAGESIZE+1);
+        data.put("pageSize",(currentPage)*PAGESIZE);
+        data.put("uid",uid);
+        List<Rcv> rcv1 = rcvService.getPageUser(data);
+        if(rcv1.size()!=0){
+            request.setAttribute("totalPages",totalPages);
+            request.setAttribute("rcv1",rcv1);
+            return "readUserVC";
+        } else{
+            request.setAttribute("str1","没有已读简历");
+            return "DeliveryDetail";
+        }
+    }
 
     @RequestMapping("/DeliveryVC")
     public String DeliveryVC(HttpSession session,HttpServletResponse response,
@@ -144,8 +169,10 @@ public class RcvController {//投递简历
         }
     }
 
-
-
+    @RequestMapping("/goDeliveryDetail")
+    public String goDeliveryDetail()throws Exception{
+        return "DeliveryDetail";
+    }
 
 
 

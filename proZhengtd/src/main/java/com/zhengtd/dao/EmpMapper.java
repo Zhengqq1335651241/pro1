@@ -13,7 +13,9 @@ public interface EmpMapper {
     boolean addEmp(Emp emp);
     boolean updateEmp(Emp emp);
     boolean deleteEmp(Emp emp);
+    Emp getByLoginEmp(Emp emp);
     Emp getEmpById(Emp emp);
     List<Emp> getEmpByDept(Emp emp);
     List<Emp> getEmpByPost(Emp emp);
+    List<Emp> getEmpByState(Emp emp);
 }
