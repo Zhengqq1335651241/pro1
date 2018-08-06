@@ -67,7 +67,7 @@
             <td>
                 <form action="addEmpPage">
                     <input name="cv_id" type="hidden" value="${vitae2.cv_id}">
-                    <input type="submit" value="开户">
+                    <input type="submit" value="分配员工账号">
                 </form>
             </td>
 

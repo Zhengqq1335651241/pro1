@@ -33,46 +33,40 @@ public class AdminController {//管理员
     @Resource
     private EmpService empService;
 
+    @RequestMapping("/AdminHomePage")//管理员主页
+    public String getHomePage()throws Exception{
+        return "AdminWindow";
+    }
+    @RequestMapping("/adminPass")//进入管理员登陆页面
+    public String adminPass()throws Exception{
+        return "AdminLogin";
+    }
     @RequestMapping("/adminLogin")//管理员登陆
     public String AdminLogin(Admin admin, HttpSession session) throws Exception{
         Admin admin1 = adminService.getByLoginA(admin);
-
         if (null!=admin1){
             session.setAttribute("admin",admin1);
             return "AdminWindow";
         }
         return "../../index";
     }
-    @RequestMapping("/adminPass")
-    public String adminPass()throws Exception{
-        return "AdminLogin";
-    }
-
-    @RequestMapping("/AdminHomePage")
-    public String getHomePage()throws Exception{
-        return "AdminWindow";
-    }
-
     @RequestMapping("/getDeliveryCenter")//管理员简历中心
     public String getDeliveryCenter()throws Exception{
         return "DeliveryCenter";
     }
 
-
-
-    @RequestMapping("/lookVC")
+    @RequestMapping("/lookVC")//查看简历
     public String getLookVC(HttpSession session,HttpServletResponse response, HttpServletRequest request)throws Exception{
        int rv_cvId = Integer.parseInt(request.getParameter("rv_cvId"));
        Vitae vitae = vitaeService.getByIdVC(new Vitae(rv_cvId));
        if(vitae!=null){
            session.setAttribute("vitae",vitae);
-
            return "OneVCDetail";
        }
        return "DeliveryCenter";
     }
 
-    @RequestMapping("/invite")//邀请面试
+    @RequestMapping("/invite")//管理员邀请面试
     public String Invite(HttpSession session,HttpServletResponse response, HttpServletRequest request)throws Exception{
         int rv_id = Integer.parseInt(request.getParameter("rv_id"));
         Rcv rcv = rcvService.getRcvById(new Rcv(rv_id));
@@ -87,7 +81,7 @@ public class AdminController {//管理员
         }
     }
 
-    @RequestMapping("/refuseInvite")//直接拒绝
+    @RequestMapping("/refuseInvite")//管理员直接拒绝
     public String refuseInvite(HttpSession session,HttpServletResponse response, HttpServletRequest request)throws Exception{
         int rv_id = Integer.parseInt(request.getParameter("rv_id"));
         Rcv rcv = rcvService.getRcvById(new Rcv(rv_id));
@@ -100,7 +94,7 @@ public class AdminController {//管理员
         }
     }
 
-    @RequestMapping("/hire")//录用
+    @RequestMapping("/hire")//管理员录用用户
     public String hire(HttpSession session,HttpServletResponse response, HttpServletRequest request)throws Exception{
         int rv_id = Integer.parseInt(request.getParameter("rv_id"));
         Rcv rcv = rcvService.getRcvById(new Rcv(rv_id));
@@ -113,11 +107,18 @@ public class AdminController {//管理员
         }
     }
 
-    @RequestMapping("/successHire")//查看录用的
-    public String successHirePage2(HttpSession session){
+
+
+    @RequestMapping("/successHire")//查看录用的并分配账号
+    public String successHirePage2(HttpSession session,HttpServletRequest request){
         int rv_invite = 4;
         Rcv rcv = new Rcv();rcv.setRv_invite(rv_invite);
         List<Rcv> rcv1 = rcvService.getByInvite(rcv);
+        if(rcv1.size()==0){
+            //没有已录用人员返回提示
+            request.setAttribute("str1","没有被录用人员");
+            return "DeliveryCenter";
+        }
         List<Vitae> vitae2 = new ArrayList<>();
         for(int i=0;i<rcv1.size();i++){
             int rv_cvId = rcv1.get(i).getRv_cvId();
@@ -130,7 +131,4 @@ public class AdminController {//管理员
         session.setAttribute("rcv1",rcv1);
         return "successHire";
     }
-
-
-
 }

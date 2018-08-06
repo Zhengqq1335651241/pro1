@@ -216,7 +216,7 @@
             <legend>欢迎用户:${sessionScope.user.u_name}!</legend>
             <ul>
                 <li><a href="getVitaeDetail?currentPage=1">个人简历</a></li>
-                <li><a href="goDeliveryDetail">投递详情</a></li>
+                <li><a href="getDeliveryDetail?currentPage=1">投递详情</a></li>
                 <li><a href="#">退出登陆</a></li>
             </ul>
         </fieldset>
@@ -339,6 +339,11 @@
 
                 <input id="n10" type="submit" value="确认提交">
             </form>
+
+            <p style="color:red; size: 40px">${requestScope.str1}</p>
+            <p style="color:red; size: 40px">${requestScope.str2}</p>
+            <p style="color:red; size: 40px">${requestScope.str5}</p>
+            <p style="color:red; size: 40px">${requestScope.str4}</p>
         </fieldset>
     </div>
 
@@ -363,7 +368,7 @@
                     <td>${recruit.r_jobRequirement}</td>
                     <td>${recruit.r_other}</td>
                     <td>
-                        <form action="toudi" method="post">
+                        <form action="TouDi" method="post">
                             <input name="r_id" type="hidden" value="${recruit.r_id}">
                             <input type="submit" value="投递">
                         </form>

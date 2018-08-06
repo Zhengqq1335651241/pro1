@@ -21,6 +21,7 @@ public class Vitae implements Serializable {
     private String cv_experience;
     private String cv_other;
     private int cv_state;
+
     private String cv_eduBackground;
 
     public Vitae(int cv_id, int cv_uid, String cv_name, String cv_birthday, String cv_sex, String cv_address, String cv_phone, String cv_major, String cv_email, String cv_school, String cv_able, String cv_hometown, String cv_experience, String cv_other) {

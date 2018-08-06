@@ -43,43 +43,28 @@
     </style>
 </head>
 <body id="b1">
-<a href="AdminHomePage"><font color="red">《返回首页</font></a>
-<br/><br/><br/><br/>
+<a href="EmpHomePage"><font color="red">《返回首页</font></a>
+<br/>
 
 <fieldset>
-    <legend>职位删除</legend>
-        <table style="text-align: center">
+    <legend></legend>
+    <table style="text-align: center">
+        <tr>
+            <td>职位名称</td>
+            <td>创建时间</td>
+        </tr>
+        <c:forEach items="${requestScope.positions2}" var="positions2">
             <tr>
-                <td>职位名称</td>
-                <td>创建时间</td>
-                <td>操作</td>
+                <td>
+                        ${positions2.p_name}
+                </td>
+                <td>
+                        ${positions2.p_addTime}
+                </td>
             </tr>
-            <c:forEach items="${requestScope.positions2}" var="positions2">
-                <tr>
-                    <td>
-                            ${positions2.p_name}
-                    </td>
-                    <td>
-                            ${positions2.p_addTime}
-                    </td>
-                    <td>
-                        <form action="deletePosition" method="post">
-                            <input name="p_id" type="hidden" value="${positions2.p_id}">
-                            <input type="submit" value="删除">
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
+        </c:forEach>
+    </table>
 
-
-    <p style="color:red; size: 30px">
-        ${requestScope.str1}
-        ${requestScope.updatePosition1}
-        ${requestScope.updateposition2}
-        ${requestScope.deletePosition1}
-        ${requestScope.deleteposition2}
-    </p>
 </fieldset>
 </body>
 </html>

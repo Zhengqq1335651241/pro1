@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhengtd.dao.AttendanceMapper">
+
+    <insert id="addAttendRecord">
+        INSERT INTO T_ATTENDANCE (AT_ID, AT_ONWORK, AT_OFFWORK, AT_WORKDATE,
+        AT_EID, AT_STATE) VALUES (ATTENDANCE_SEQ.nextval,#{at_onWork},#{at_offWork},
+        #{at_workDate},#{at_eid},#{at_state})
+    </insert>
+
+    <update id="updateAttendRecord"></update>
+    <delete id="deleteAttendRecord"></delete>
+    <select id="getRecordByEmp" resultType="com.zhengtd.model.Attendance"></select>
+    <select id="getAll" resultType="com.zhengtd.model.Attendance"></select>
+    <select id="getPageRecord" resultType="com.zhengtd.model.Attendance"></select>
+    <select id="getRecordByID" resultType="com.zhengtd.model.Attendance"></select>
+</mapper>

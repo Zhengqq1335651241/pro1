@@ -11,6 +11,8 @@ import java.util.Map;
 public interface RcvService {
     boolean addRcv(Rcv rcv);
     boolean deleteRcv(Rcv rcv);
+    boolean deleteAllRcv();
+    boolean deleteUserRcv(Rcv rcv);
     boolean updateRcv(Rcv rcv);
     List<Rcv> getByUIDAllRcv(Rcv rcv);
     List<Rcv> getPage(Map<String,Object> data);

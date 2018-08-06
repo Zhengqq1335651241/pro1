@@ -30,4 +30,14 @@ public class EmpTrainServiceImpl implements EmpTrainService {
     public List<EmpTrain> getAllEmpTrain(EmpTrain empTrain) {
         return empTrainMapper.getAllEmpTrain(empTrain);
     }
+
+    @Override
+    public List<EmpTrain> getTrainByEmpID(EmpTrain empTrain) {
+        return empTrainMapper.getTrainByEmpID(empTrain);
+    }
+
+    @Override
+    public List<EmpTrain> getTrainByTrainID(EmpTrain empTrain) {
+        return empTrainMapper.getTrainByTrainID(empTrain);
+    }
 }

@@ -51,4 +51,14 @@ public class TrainServiceImpl implements TrainService {
     public List<Train> getTrainPage(Map<String, Object> data) {
         return trainMapper.getTrainPage(data);
     }
+
+    @Override
+    public List<Train> getTrainByEmpDeptID(Train train) {
+        return trainMapper.getTrainByEmpDeptID(train);
+    }
+
+    @Override
+    public List<Train> getTrainPageByEmp(Map<String, Object> data) {
+        return trainMapper.getTrainPageByEmp(data);
+    }
 }

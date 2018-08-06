@@ -66,10 +66,12 @@
             <ul>
                 <li><a href="AdminHomePage">返回首页</a></li>
                 <li><a href="successHire">已录用人员</a></li>
-                <li><a href="readVCDetail?currentPage=1">已读简历</a></li>
-                <li><a href="unreadVCDetail?currentPage=1">未读简历</a></li>
+                <li><a href="readVCDetail?currentPage=1">查看简历</a></li>
             </ul>
         </fieldset>
+
+        <p style="color:red; size: 40px">${requestScope.str1}</p>
+        <p style="color:red; size: 40px">${requestScope.str2}</p>
     </div>
 </div>
 

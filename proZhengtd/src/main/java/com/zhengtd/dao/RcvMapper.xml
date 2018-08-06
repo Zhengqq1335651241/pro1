@@ -15,6 +15,12 @@
     <delete id="deleteRcv" parameterType="Rcv">
         DELETE FROM T_RCV WHERE RV_ID=#{rv_id}
     </delete>
+    <delete id="deleteAllRcv">
+        DELETE FROM T_RCV
+    </delete>
+    <delete id="deleteUserRcv">
+        DELETE FROM T_RCV WHERE RV_UID=#{rv_uid}
+    </delete>
 
     <select id="getByUIDAllRcv" resultType="com.zhengtd.model.Rcv">
         SELECT * FROM T_RCV WHERE RV_UID=#{rv_uid}
@@ -22,7 +28,7 @@
 
     <select id="getPage" resultType="com.zhengtd.model.Rcv">
         SELECT * FROM (
-        SELECT rownum rn,u.* FROM T_RCV u WHERE RV_STATE=#{state}) gd
+        SELECT rownum rn,u.* FROM T_RCV u) gd
         Where gd.rn BETWEEN #{currentPage} AND #{pageSize}
     </select>
 

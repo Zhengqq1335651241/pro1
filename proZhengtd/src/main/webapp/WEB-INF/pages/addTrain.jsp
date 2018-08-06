@@ -15,29 +15,7 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
-    <%--<script src="js/jquery.js" ></script>--%>
-    <%--<script>--%>
-        <%--$(function () {--%>
-            <%--$("#dept").click(function () {--%>
-                <%--var a=$("#dept").val();--%>
-                <%--$.ajax({--%>
-                    <%--url:"getPosition",--%>
-                    <%--data:"d_id="+a,--%>
-                    <%--type:"post",--%>
-                    <%--success:function (obj) {--%>
-                        <%--$("#pos option").remove();--%>
-                        <%--$.each(obj,function (i,item) {--%>
-                            <%--var b=item.p_id;--%>
-                            <%--$("#pos").append(--%>
-                                <%--"<option value="+b+">"+item.p_name+"</option>"--%>
-                            <%--)--%>
-                        <%--})--%>
-                    <%--}--%>
-                <%--})--%>
-            <%--})--%>
-        <%--})--%>
 
-    <%--</script>--%>
     <style>
         #b1{
             background: url(img/window.jpg) no-repeat center center fixed;
@@ -111,7 +89,7 @@
                         <td>${trains1.t_startTime}</td>
                         <td>${trains1.t_endTime}</td>
                         <td>${trains1.t_place}</td>
-                        <td>${trains1.t_eid}</td>
+                        <td>${trains1.t_obj}</td>
 
                         <td>
                             <form action="goUpdateTrain">

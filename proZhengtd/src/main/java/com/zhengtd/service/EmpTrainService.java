@@ -11,4 +11,6 @@ public interface EmpTrainService {
     boolean addEmpTrain(EmpTrain empTrain);
     boolean deleteEmpTrain(EmpTrain empTrain);
     List<EmpTrain> getAllEmpTrain(EmpTrain empTrain);
+    List<EmpTrain> getTrainByEmpID(EmpTrain empTrain);
+    List<EmpTrain> getTrainByTrainID(EmpTrain empTrain);
 }

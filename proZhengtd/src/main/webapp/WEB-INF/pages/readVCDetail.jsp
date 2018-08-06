@@ -14,7 +14,7 @@
 <html>
 <head>
     <base href="<%=basePath%>"/>
-    <title>已读简历</title>
+    <title>查看简历</title>
     <style>
         #b1{
             background: url(img/window.jpg) no-repeat center center fixed;
@@ -46,7 +46,7 @@
 <br/><br/><br/><br/>
 <div style="width: 80%;height: 80%">
     <fieldset>
-        <legend>已读简历</legend>
+        <legend>查阅简历</legend>
         <table>
             <tr>
                 <td>职位</td>
@@ -56,6 +56,7 @@
                 <td>简历详情</td>
                 <td>邀请操作</td>
                 <td>录用操作</td>
+                <td>删除</td>
             </tr>
             <c:forEach items="${requestScope.rcv1}" var="rcv1">
                 <tr>
@@ -70,6 +71,9 @@
                         <c:if test="${rcv1.rv_invite==2}">
                             ${"邀请"}
                         </c:if>
+                        <c:if test="${rcv1.rv_invite==3}">
+                            ${"接受邀请"}
+                        </c:if>
                         <c:if test="${rcv1.rv_invite==4}">
                             ${"录用"}
                         </c:if>
@@ -79,6 +83,9 @@
                         <c:if test="${rcv1.rv_invite==6}">
                             ${"已邀请"}
                         </c:if>
+                        <c:if test="${rcv1.rv_invite==7}">
+                            ${"正式员工"}
+                        </c:if>
                     </td>
 
                     <td>
@@ -87,7 +94,6 @@
                             <input type="submit" value="查看简历详情">
                         </form>
                     </td>
-
 
 
                     <td>
@@ -107,15 +113,29 @@
                             <input type="submit" value="录用">
                         </form>
                     </td>
+
+                    <td>
+                        <form action="deleteRcv" method="post">
+                            <input name="rv_id" type="hidden" value="${rcv1.rv_id}">
+                            <input type="submit" value="删除">
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
 
             <tr>
-                <td colspan="7">
+                <td colspan="5">
                     <c:forEach begin="1" end="${requestScope.totalPages}" var="PAGESIZE">
                         <a href="readVCDetail?currentPage=${PAGESIZE}">${PAGESIZE}</a>
                     </c:forEach>
                 </td>
+
+                <td colspan="3">
+                    <form action="deleteAllRCV" method="post">
+                        <input type="submit" value="删除所有">
+                    </form>
+                </td>
+
             </tr>
         </table>
     </fieldset>

@@ -45,10 +45,10 @@
 
 <a href="UserHomePage"><font color="red" >《返回首页</font></a>
 <br/><br/><br/><br/>
-
+<fieldset>
+    <legend>简历信息</legend>
 
     <table>
-        <caption>简历信息</caption>
         <tr>
             <td>姓名</td>
             <td>生日</td>
@@ -105,5 +105,8 @@
             </td>
         </tr>
     </table>
+    <p style="color:red; size: 40px">${requestScope.str3}</p>
+    <p style="color:red; size: 40px">${requestScope.str4}</p>
+</fieldset>
 </body>
 </html>

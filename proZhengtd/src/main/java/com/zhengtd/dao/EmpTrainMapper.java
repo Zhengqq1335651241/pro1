@@ -13,6 +13,8 @@ public interface EmpTrainMapper {
     boolean addEmpTrain(EmpTrain empTrain);
     boolean deleteEmpTrain(EmpTrain empTrain);
     List<EmpTrain> getAllEmpTrain(EmpTrain empTrain);
-    List<EmpTrain> getTrainByEmpId(int e_eid);
-    List<EmpTrain> getEmpByTrainId(int t_id);
+    List<EmpTrain> getTrainByEmpID(EmpTrain empTrain);
+    List<EmpTrain> getTrainByTrainID(EmpTrain empTrain);
+//    List<EmpTrain> getTrainByEmpId(int e_eid);
+//    List<EmpTrain> getEmpByTrainId(int t_id);
 }

@@ -162,7 +162,7 @@
     </fieldset>
 
     <p style="color: red; size: 30px">
-        ${requestScope.str1}
+        ${requestScope.str4}
     </p>
 </div>
 

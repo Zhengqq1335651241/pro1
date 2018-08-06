@@ -33,4 +33,13 @@ public class EmpTrain implements Serializable {
     public void setTrain_id(int train_id) {
         this.train_id = train_id;
     }
+
+    @Override
+    public String toString() {
+        return "EmpTrain{" +
+                "et_id=" + et_id +
+                ", emp_id=" + emp_id +
+                ", train_id=" + train_id +
+                '}';
+    }
 }

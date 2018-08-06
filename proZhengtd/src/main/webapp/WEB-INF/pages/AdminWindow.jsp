@@ -61,7 +61,7 @@
                     <li><a href="getDeliveryCenter">简历信息</a></li>
                     <li><a href="goDeptPostPage">部门职位</a></li>
                     <li><a href="goTrainPage">培训管理</a></li>
-                    <li><a href="#">员工管理</a></li>
+                    <li><a href="goEmpManager">员工管理</a></li>
                     <li><a href="#">薪资管理</a></li>
                     <li><a href="#">奖惩管理</a></li>
                     <li><a href="#">考勤管理</a></li>

@@ -12,9 +12,11 @@ public class Rcv implements Serializable{
     private int rv_cvId;
     private String rv_time;
     private int rv_state;
+    //1,已读2,未读
     private String rv_job;
     private String rv_uname;
     private int rv_invite;
+    //1,无邀请2,邀请3,接受邀请4,录用5,不录用6,拒接邀请,7已录用
 
     public Rcv() {
     }

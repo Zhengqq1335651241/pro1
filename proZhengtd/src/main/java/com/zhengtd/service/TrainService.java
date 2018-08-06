@@ -16,4 +16,6 @@ public interface TrainService {
     List<Train> getAllTrain(Train train);
     List<Train> getTrainPage(Map<String,Object> data);
     List<Train> getTrainByPush(Train train);
+    List<Train> getTrainByEmpDeptID(Train train);
+    List<Train> getTrainPageByEmp(Map<String,Object> data);
 }

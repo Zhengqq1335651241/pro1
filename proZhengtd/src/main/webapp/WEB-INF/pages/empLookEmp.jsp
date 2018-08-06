@@ -3,7 +3,7 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/8/3
-  Time: 10:35
+  Time: 10:59
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -43,43 +43,31 @@
     </style>
 </head>
 <body id="b1">
-<a href="AdminHomePage"><font color="red">《返回首页</font></a>
-<br/><br/><br/><br/>
+<a href="EmpHomePage"><font color="red">《返回首页</font></a>
+<br/>
 
 <fieldset>
-    <legend>职位删除</legend>
-        <table style="text-align: center">
+    <legend>职位</legend>
+    <table style="text-align: center">
+        <tr>
+            <td>员工账户</td>
+            <td>性别</td>
+            <td>生日</td>
+            <td>电话</td>
+            <td>邮箱</td>
+        </tr>
+        <c:forEach items="${requestScope.emp1}" var="emp1">
             <tr>
-                <td>职位名称</td>
-                <td>创建时间</td>
-                <td>操作</td>
+                <td>${emp1.e_eName}</td>
+                <td>${emp1.e_sex}</td>
+                <td>${emp1.e_birthday}</td>
+                <td>${emp1.e_phone}</td>
+                <td>${emp1.e_email}</td>
             </tr>
-            <c:forEach items="${requestScope.positions2}" var="positions2">
-                <tr>
-                    <td>
-                            ${positions2.p_name}
-                    </td>
-                    <td>
-                            ${positions2.p_addTime}
-                    </td>
-                    <td>
-                        <form action="deletePosition" method="post">
-                            <input name="p_id" type="hidden" value="${positions2.p_id}">
-                            <input type="submit" value="删除">
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
+        </c:forEach>
+    </table>
 
-
-    <p style="color:red; size: 30px">
-        ${requestScope.str1}
-        ${requestScope.updatePosition1}
-        ${requestScope.updateposition2}
-        ${requestScope.deletePosition1}
-        ${requestScope.deleteposition2}
-    </p>
 </fieldset>
+
 </body>
 </html>

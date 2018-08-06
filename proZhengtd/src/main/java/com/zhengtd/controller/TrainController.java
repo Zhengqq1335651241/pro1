@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,14 +53,24 @@ public class TrainController {
     public String addTrainPage(HttpServletRequest request)throws Exception{
         Train train = new Train();train.setT_push(1);
         List<Train> trains1 = trainService.getTrainByPush(train);
+        List<Dept> depts2 = new ArrayList<>();
+        for(int i=0;i<trains1.size();i++){
+            int t_obj =trains1.get(i).getT_obj();
+            if(t_obj!=-1){
+                Dept dept = deptService.getDeptByID(new Dept(t_obj));
+                depts2.add(dept);
+            }
+        }
         List<Dept> depts1 = deptService.findAllDept();
         if(trains1.size()==0){
             request.setAttribute("str2","没有未发布培训");
             request.setAttribute("depts1",depts1);
+            request.setAttribute("depts2",depts2);
             return "addTrain";
         }else{
             request.setAttribute("trains1",trains1);
             request.setAttribute("depts1",depts1);
+            request.setAttribute("depts2",depts2);
             return "addTrain";
         }
     }
@@ -72,53 +83,50 @@ public class TrainController {
         if(t_obj==-1){
             Emp emp = new Emp();emp.setE_state(-1);
             List<Emp> empList = empService.getEmpByState(emp);
-            System.out.println(empList);
             if(empList.size()==0) {
                 request.setAttribute("str1","没有试用期员工");
                 return addTrainPage(request);
             }else{
-                for (Emp anEmpList : empList) {
-                    int emp_id = anEmpList.getE_eid();
-                    train.setT_obj(emp_id);
+                for (int i=0;i<empList.size();i++) {
+                    int e_state = empList.get(i).getE_state();
+                    int emp_id = empList.get(i).getE_eid();
+                    train.setT_obj(e_state);
+
                     boolean flag = trainService.addTrain(train);
                     if (flag) {
                         EmpTrain empTrain = new EmpTrain();
                         empTrain.setEmp_id(emp_id);
                         empTrain.setTrain_id(train.getT_id());
                         boolean flag1 = empTrainService.addEmpTrain(empTrain);
-                        if (flag1) {
-                            request.setAttribute("str1", "添加成功");
-                            return addTrainPage(request);
-                        }
                     }
                 }
+                request.setAttribute("str1", "添加成功");
+                return addTrainPage(request);
+
             }
-        }else{
+        }else{//添加部门
             Emp emp = new Emp();emp.setE_deptId(t_obj);
             List<Emp> empList = empService.getEmpByDept(emp);
             if(empList.size()==0){
                 request.setAttribute("str1","该部门没有员工");
                 return addTrainPage(request);
             }else{
-                for (Emp anEmpList : empList) {
-                    int emp_id = anEmpList.getE_eid();
-                    train.setT_obj(emp_id);
+                for (int i=0;i<empList.size();i++) {
+                    int dept_id = empList.get(i).getE_deptId();
+                    int emp_id = empList.get(i).getE_eid();
+                    train.setT_obj(dept_id);
                     boolean flag = trainService.addTrain(train);
                     if (flag) {
                         EmpTrain empTrain = new EmpTrain();
                         empTrain.setEmp_id(emp_id);
                         empTrain.setTrain_id(train.getT_id());
                         boolean flag1 = empTrainService.addEmpTrain(empTrain);
-                        if (flag1) {
-                            request.setAttribute("str1", "添加成功");
-                            return addTrainPage(request);
-                        }
                     }
                 }
+                    request.setAttribute("str1", "添加成功");
+                    return addTrainPage(request);
             }
         }
-        request.setAttribute("str1","添加出错");
-        return addTrainPage(request);
     }
     @RequestMapping("/getAllTrain")//管理员查看所有培训
     public String getAllTrain(int currentPage, HttpSession session,
@@ -189,6 +197,33 @@ public class TrainController {
         }else{
             request.setAttribute("str1","修改发布失败");
             return goUpdateTrain(request);
+        }
+    }
+
+    @RequestMapping("/EmpLookTrain")
+    public String EmpLookTrain(HttpSession session,
+                               HttpServletRequest request)throws Exception{
+        Emp emp = (Emp) session.getAttribute("emp");
+        EmpTrain empTrain = new EmpTrain();empTrain.setEmp_id(emp.getE_eid());
+        List<EmpTrain> empTrains = empTrainService.getTrainByEmpID(empTrain);
+        if(empTrains.size()==0){
+            request.setAttribute("str1","没有培训");
+            return "EmpWindow";
+        }else{
+            List<Integer> t_ids = new ArrayList<>();
+            for(int i=0;i<empTrains.size();i++){
+                int t_id = empTrains.get(i).getTrain_id();
+                t_ids.add(t_id);
+            }
+            List<Train> trains = new ArrayList<>();
+            for(int i=0;i<t_ids.size();i++){
+                int t_id = t_ids.get(i);
+                Train train1 = new Train();train1.setT_id(t_id);
+                Train train = trainService.getTrainByTid(train1);
+                trains.add(train);
+            }
+            request.setAttribute("trains",trains);
+            return "EmpLookTrain";
         }
     }
 }

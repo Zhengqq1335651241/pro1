@@ -58,15 +58,19 @@
         <fieldset>
             <legend>欢迎用户:${sessionScope.emp.e_eName}!</legend>
             <ul>
-                <li><a href="#">个人信息</a></li>
-                <li><a href="#">部门职位员工</a></li>
-                <li><a href="#">培训</a></li>
+                <li><a href="EmpDetail">个人信息</a></li>
+                <li><a href="EmpLookDeptPost">部门职位员工</a></li>
+                <li><a href="EmpLookTrain">培训</a></li>
                 <li><a href="#">奖惩</a></li>
                 <li><a href="#">考勤打卡</a></li>
                 <li><a href="#">薪资</a></li>
                 <li><a href="#">退出登陆</a></li>
             </ul>
         </fieldset>
+
+        <p style="color:red; size: 30px">
+            ${requestScope.str1}
+        </p>
     </div>
 </div>
 

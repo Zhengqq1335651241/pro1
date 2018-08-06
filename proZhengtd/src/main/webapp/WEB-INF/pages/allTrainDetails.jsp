@@ -56,7 +56,7 @@
                 <td>培训开始时间</td>
                 <td>培训结束时间</td>
                 <td>培训地点</td>
-                <td>培训部门</td>
+                <td>培训对象</td>
                 <td>删除</td>
             </tr>
 
@@ -67,7 +67,7 @@
                     <td>${trainList.t_startTime}</td>
                     <td>${trainList.t_endTime}</td>
                     <td>${trainList.t_place}</td>
-                    <td>${trainList.t_deptId}</td>
+                    <td>${trainList.t_obj}</td>
 
                     <td>
                         <form action="deletePushTrain">

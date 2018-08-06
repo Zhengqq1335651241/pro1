@@ -28,8 +28,18 @@ public class RcvServiceImpl implements RcvService {
     }
 
     @Override
+    public boolean deleteAllRcv() {
+        return rcvMapper.deleteAllRcv();
+    }
+
+    @Override
     public boolean updateRcv(Rcv rcv) {
         return rcvMapper.updateRcv(rcv);
+    }
+
+    @Override
+    public boolean deleteUserRcv(Rcv rcv) {
+        return rcvMapper.deleteUserRcv(rcv);
     }
 
     @Override

@@ -9,15 +9,10 @@ import com.zhengtd.service.PositionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,13 +60,19 @@ public class DeptController {
                 (new Date());
         Dept dept = new Dept();dept.setD_addTime(d_addTime);
         dept.setD_name(d_name);dept.setD_loc(d_loc);
-        boolean flag = deptService.addDept(dept);
-        if(flag){
-            request.setAttribute("addDept1","部门添加成功");
-            return "DeptPost";
-        }else{
+        Dept dept1 = deptService.getDeptByDName(dept);
+        if(dept1!=null){
             request.setAttribute("addDept2","有重复,部门添加失败");
             return "DeptPost";
+        }else{
+            boolean flag = deptService.addDept(dept);
+            if(flag){
+                request.setAttribute("addDept1","部门添加成功");
+                return "DeptPost";
+            }else{
+                request.setAttribute("addDept2","部门添加失败");
+                return "DeptPost";
+            }
         }
     }
 
@@ -87,14 +88,19 @@ public class DeptController {
         Position position = new Position();
         position.setP_addTime(p_addTime);
         position.setP_name(p_name);position.setP_deptId(dept1.getD_id());
-
-        boolean flag = positionService.addPosition(position);
-        if(flag){
-            request.setAttribute("addPosition1","职位添加成功");
+        List<Position> positions = positionService.getByPName(position);
+        if(positions!=null){
+            request.setAttribute("addPosition2","有重复,职位添加失败");
             return "DeptPost";
         }else{
-            request.setAttribute("addPosition2","职位添加失败");
-            return "DeptPost";
+            boolean flag = positionService.addPosition(position);
+            if(flag){
+                request.setAttribute("addPosition1","职位添加成功");
+                return "DeptPost";
+            }else{
+                request.setAttribute("addPosition2","职位添加失败");
+                return "DeptPost";
+            }
         }
     }
 
@@ -103,12 +109,16 @@ public class DeptController {
     @RequestMapping("/deleteDept")//删除部门
     public String deleteDept(HttpServletRequest request)throws Exception{
         int d_id = Integer.parseInt(request.getParameter("d_id"));
+        Position position1 = new Position();position1.setP_deptId(d_id);
         Emp emp = new Emp();emp.setE_deptId(d_id);
         List<Emp> empList = empService.getEmpByDept(emp);
+        //若该部门下存在在职员工，不能进行删除；如果是一个空的部门，则连同职位一起删除；
         int count1 = empList.size();
+        System.out.println();
         if(empList.size()==0){
             request.setAttribute("deleteDept1","部门删除成功");
             deptService.deleteDept(new Dept(d_id));
+            positionService.deletePosition(position1);
             return lookDeptPost(request);
         }else{
             request.setAttribute("deleteDept2","部门删除失败");
@@ -209,6 +219,43 @@ public class DeptController {
         }else{
             request.setAttribute("updatePosition2","职位修改失败");
             return lookDeptPost(request);
+        }
+    }
+
+    @RequestMapping("/EmpLookDeptPost")//员工进入查看部门职位页面
+    public String EmpLookDeptPost(HttpServletRequest request)throws Exception{
+        List<Position> positions1 = positionService.findAllPosition();
+        List<Dept> depts1 = deptService.findAllDept();
+        request.setAttribute("positions1",positions1);
+        request.setAttribute("depts1",depts1);
+        return "EmpLookDeptPostPage";
+    }
+
+    @RequestMapping("/empLookPosition")//员工查看职位
+    public String empLookPosition(HttpServletRequest request)throws Exception{
+        int d_id = Integer.parseInt(request.getParameter("d_id"));
+        Position position = new Position();position.setP_deptId(d_id);
+        List<Position> positions2 = positionService.getByPDeptId(position);
+        if(positions2.size()!=0){
+            request.setAttribute("positions2",positions2);
+            return "empLookPosition";
+        }else{
+            request.setAttribute("str1","此部门没有职位");
+            return EmpLookDeptPost(request);
+        }
+    }
+
+    @RequestMapping("/empLookEmp")//员工查看部门员工
+    public String empLookEmp(HttpServletRequest request)throws Exception{
+        int d_id = Integer.parseInt(request.getParameter("d_id"));
+        Emp emp = new Emp();emp.setE_deptId(d_id);
+        List<Emp> emp1 = empService.getEmpByDept(emp);
+        if(emp1.size()!=0){
+            request.setAttribute("emp1",emp1);
+            return "empLookEmp";
+        }else{
+            request.setAttribute("str1","此部门没有员工");
+            return EmpLookDeptPost(request);
         }
     }
 }

@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/8/3
-  Time: 10:35
+  Date: 2018/8/2
+  Time: 12:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,7 +14,7 @@
 <html>
 <head>
     <base href="<%=basePath%>"/>
-    <title></title>
+    <title>全部培训信息</title>
 
     <style>
         #b1{
@@ -31,55 +31,59 @@
             border-collapse:collapse;
             collapse: 1px;
             margin: auto;
-            color: white;
-            font-size: 20px;
+            color: honeydew;
             text-align: center;
         }
         table td{
             border: 1px solid skyblue;
+            color: honeydew;
             height: auto;
-            font-size: 20px;
         }
     </style>
+
 </head>
 <body id="b1">
-<a href="AdminHomePage"><font color="red">《返回首页</font></a>
-<br/><br/><br/><br/>
+<a href="EmpHomePage"><font color="red">《返回首页</font></a>
+<br/>
 
-<fieldset>
-    <legend>职位删除</legend>
-        <table style="text-align: center">
+<div style="height: auto;width: auto;font-size: 25px ;color: white;">
+    <fieldset style="height: 80%;width: auto">
+        <legend>培训信息</legend>
+        <table>
             <tr>
-                <td>职位名称</td>
-                <td>创建时间</td>
-                <td>操作</td>
+                <td>培训主题</td>
+                <td>培训内容</td>
+                <td>培训开始时间</td>
+                <td>培训结束时间</td>
+                <td>培训地点</td>
+                <td>培训对象</td>
+                <td>删除</td>
             </tr>
-            <c:forEach items="${requestScope.positions2}" var="positions2">
+
+            <c:forEach items="${requestScope.trains}" var="trains">
                 <tr>
+                    <td>${trains.t_topic}</td>
+                    <td>${trains.t_content}</td>
+                    <td>${trains.t_startTime}</td>
+                    <td>${trains.t_endTime}</td>
+                    <td>${trains.t_place}</td>
+                    <td>${trains.t_obj}</td>
+
                     <td>
-                            ${positions2.p_name}
-                    </td>
-                    <td>
-                            ${positions2.p_addTime}
-                    </td>
-                    <td>
-                        <form action="deletePosition" method="post">
-                            <input name="p_id" type="hidden" value="${positions2.p_id}">
+                        <form action="deletePushTrain">
+                            <input name="t_id" type="hidden" value="${trains.t_id}">
                             <input type="submit" value="删除">
                         </form>
                     </td>
                 </tr>
             </c:forEach>
+
         </table>
 
 
-    <p style="color:red; size: 30px">
-        ${requestScope.str1}
-        ${requestScope.updatePosition1}
-        ${requestScope.updateposition2}
-        ${requestScope.deletePosition1}
-        ${requestScope.deleteposition2}
-    </p>
-</fieldset>
+        <p style="color:red; size: 40px">${requestScope.str3}</p>
+    </fieldset>
+</div>
+
 </body>
 </html>

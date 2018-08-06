@@ -25,8 +25,9 @@ public class VitaeController {//简历
     @Resource
     private VitaeService vitaeService;
 
-    @RequestMapping("/getVitaeDetail")
-    public String getVCDetail(int currentPage, HttpSession session)throws Exception{
+    @RequestMapping("/getVitaeDetail")//用户获取简历信息
+    public String getVCDetail(int currentPage,
+                              HttpSession session,HttpServletRequest request)throws Exception{
 
         int state = 1;
         User user = (User) session.getAttribute("user");
@@ -53,11 +54,12 @@ public class VitaeController {//简历
             session.setAttribute("vitaes",vitaes);
             return "VCDetails";
         } else{
+            request.setAttribute("str5","没有简历,快去添加一份吧");
             return "UserWindow";
         }
     }
 
-    @RequestMapping("/addVC")
+    @RequestMapping("/addVC")//用户添加简历
     public String addCVDetail(Vitae vitae, HttpSession session, HttpServletRequest
             request, HttpServletResponse response)throws Exception{
         User user = (User) session.getAttribute("user");
@@ -67,39 +69,46 @@ public class VitaeController {//简历
 
         if(flag){
             session.setAttribute("vitae",vitae);
-            int currentPage=1;
-            return getVCDetail(currentPage, session);
+            request.setAttribute("str2","添加简历成功");
+            return "UserWindow";
         }else{
+            request.setAttribute("str2","添加简历失败");
             return "UserWindow";
         }
     }
 
-    @RequestMapping("/deleteCV")
+    @RequestMapping("/deleteCV")//用户删除简历
     public String deleteCVDetail(HttpSession session,HttpServletRequest request,HttpServletResponse response)throws Exception{
         int cv_id = Integer.parseInt(request.getParameter("cv_id"));
         boolean flag = vitaeService.deleteVitae(new Vitae(cv_id));
-
         int currentPage=1;
-        return getVCDetail(currentPage, session);
+        request.setAttribute("str3","简历删除成功");
+        return getVCDetail(currentPage, session,request);
     }
 
-    @RequestMapping("/updateCV")
-    public void getCVDetailPage(HttpServletResponse response,HttpServletRequest request)throws Exception{
+    @RequestMapping("/updateCV")//用户修改简历页面
+    public String getCVDetailPage(HttpServletResponse response,
+                                  HttpServletRequest request,HttpSession session)throws Exception{
         int cv_id = Integer.parseInt(request.getParameter("cv_id"));
         Vitae vitae = vitaeService.getByIdVC(new Vitae(cv_id));
         if(vitae.getCv_name()!=null){
             request.getSession().setAttribute("vi",vitae);
-            request.getRequestDispatcher("WEB-INF/pages/alterCVDetail.jsp").forward(request,response);
+            return "alterCVDetail";
+        }else{
+            return "alterCVDetail";
         }
     }
 
-    @RequestMapping("/alterCVDetail")
-    public String alterCVDetail(Vitae vitae,HttpSession session,HttpServletResponse response)throws Exception{
+    @RequestMapping("/alterCVDetail")//用户修改简历
+    public String alterCVDetail(Vitae vitae,HttpSession session,HttpServletRequest request,
+                                HttpServletResponse response)throws Exception{
         boolean flag = vitaeService.updateVitae(vitae);
         if(flag){
             int currentPage=1;
-            return getVCDetail(currentPage, session);
+            request.setAttribute("str4","简历修改成功");
+            return getVCDetail(currentPage, session,request);
         }else{
+            request.setAttribute("str4","简历修改失败");
             return "alterCVDetail";
         }
     }

@@ -58,89 +58,95 @@
 
 </head>
 <body id="b1">
-
 <a href="UserHomePage"><font color="red" >《返回首页</font></a>
 <br/><br/><br/><br/>
-
-<div>
-    <div>
+    <div style="width: 80%;height:80%;">
         <fieldset>
-            <ul>
-                <li><a href="UserHomePage">返回首页</a></li>
-                <li><a href="readUserVC?currentPage=1">已读简历</a></li>
-                <li><a href="unreadUserVC?currentPage=1">未读简历</a></li>
-            </ul>
+            <legend>投递详情</legend>
+                <table>
+                <tr>
+                    <td>投递职位</td>
+                    <td>应聘者姓名</td>
+                    <td>投递时间</td>
+                    <td>投递状态</td>
+                    <td>简历状态</td>
+                    <td>是否邀请</td>
+                    <td>删除</td>
+                </tr>
+            <c:forEach items="${sessionScope.rcvList}" var="rcvList">
+                <tr>
+                    <td>${rcvList.rv_job}</td>
+                    <td>${rcvList.rv_uname}</td>
+                    <td>${rcvList.rv_time}</td>
+                    <td>
+                        <c:if test="${rcvList.rv_state==1}">
+                            ${"未查看"}
+                        </c:if>
+                        <c:if test="${rcvList.rv_state==2}">
+                            ${"已查看"}
+                        </c:if>
+                    </td>
+
+                    <td>
+                        <c:if test="${rcvList.rv_invite==1}">
+                            ${"无邀请"}
+                        </c:if>
+                        <c:if test="${rcvList.rv_invite==2}">
+                            <p style="color: yellow ;size: 50px">${"邀请"}</p>
+                        </c:if>
+                        <c:if test="${rcvList.rv_invite==3}">
+                            ${"接受邀请"}
+                        </c:if>
+                        <c:if test="${rcvList.rv_invite==4}">
+                                <p style="color: red ;size: 50px">${"恭喜被录用"}</p>
+                        </c:if>
+                        <c:if test="${rcvList.rv_invite==5}">
+                            ${"不录用"}
+                        </c:if>
+                        <c:if test="${rcvList.rv_invite==6}">
+                            ${"拒接邀请"}
+                        </c:if>
+
+                    </td>
+
+                    <td>
+                        <form action="acceptInvite" method="post">
+                            <input name="rv_id" type="hidden" value="${rcvList.rv_id}">
+                            <input type="submit" value="接受邀请">
+                        </form>
+
+                        <form action="refuseIn" method="post">
+                            <input name="rv_id" type="hidden" value="${rcvList.rv_id}">
+                            <input type="submit" value="拒绝邀请">
+                        </form>
+                    </td>
+
+                    <td>
+                        <form action="deleteRCVTouDi" method="post">
+                            <input name="rv_id" type="hidden" value="${rcvList.rv_id}">
+                            <input type="submit" value="删除">
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+
+                <tr>
+                    <td colspan="4">
+                        <c:forEach begin="1" end="${requestScope.totalPages}" var="PAGESIZE">
+                            <a href="getDeliveryDetail?currentPage=${PAGESIZE}">${PAGESIZE}</a>
+                        </c:forEach>
+                    </td>
+
+                    <td colspan="3">
+                        <form action="deleteAllUserRCV" method="post">
+                            <input type="submit" value="删除所有">
+                        </form>
+                    </td>
+                </tr>
+
+            </table>
         </fieldset>
     </div>
-</div>
-
-
-<%--<table>--%>
-    <%--<caption>投递详情</caption>--%>
-    <%--<tr>--%>
-        <%--<td>职位</td>--%>
-        <%--<td>姓名</td>--%>
-        <%--<td>投递时间</td>--%>
-        <%--<td>投递状态</td>--%>
-        <%--<td>简历状态</td>--%>
-        <%--<td>操作</td>--%>
-    <%--</tr>--%>
-    <%--<c:forEach items="${sessionScope.rcvList}" var="rcvList">--%>
-        <%--<tr>--%>
-            <%--<td>${rcvList.rv_job}</td>--%>
-            <%--<td>${rcvList.rv_uname}</td>--%>
-            <%--<td>${rcvList.rv_time}</td>--%>
-            <%--<td>--%>
-                <%--<c:if test="${rcvList.rv_state==1}">--%>
-                    <%--${"未查看"}--%>
-                <%--</c:if>--%>
-                <%--<c:if test="${rcvList.rv_state==2}">--%>
-                    <%--${"已查看"}--%>
-                <%--</c:if>--%>
-            <%--</td>--%>
-
-            <%--<td>--%>
-                <%--<c:if test="${rcvList.rv_invite==1}">--%>
-                    <%--${"无邀请"}--%>
-                <%--</c:if>--%>
-                <%--<c:if test="${rcvList.rv_invite==2}">--%>
-                    <%--${"邀请"}--%>
-                <%--</c:if>--%>
-                <%--<c:if test="${rcvList.rv_invite==3}">--%>
-                    <%--${"接受邀请"}--%>
-                <%--</c:if>--%>
-                <%--<c:if test="${rcvList.rv_invite==4}">--%>
-                    <%--<p style="color: red ;size: 50px">${"恭喜被录用"}</p>--%>
-                <%--</c:if>--%>
-                <%--<c:if test="${rcvList.rv_invite==5}">--%>
-                    <%--${"不录用"}--%>
-                <%--</c:if>--%>
-                <%--<c:if test="${rcvList.rv_invite==6}">--%>
-                    <%--${"拒接邀请"}--%>
-                <%--</c:if>--%>
-            <%--</td>--%>
-
-            <%--<td>--%>
-                <%--<form action="acceptInvite" method="post">--%>
-                    <%--<input name="rv_id" type="hidden" value="${rcvList.rv_id}">--%>
-                    <%--<input type="submit" value="接受邀请">--%>
-                <%--</form>--%>
-                <%--<form action="refuseIn" method="post">--%>
-                    <%--<input name="rv_id" type="hidden" value="${rcvList.rv_id}">--%>
-                    <%--<input type="submit" value="拒绝邀请">--%>
-                <%--</form>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-    <%--</c:forEach>--%>
-
-    <%--<tr>--%>
-        <%--<td colspan="6">--%>
-            <%--<c:forEach begin="1" end="${requestScope.totalPages}" var="PAGESIZE">--%>
-                <%--<a href="getDeliveryDetail?currentPage=${PAGESIZE}">${PAGESIZE}</a>--%>
-            <%--</c:forEach>--%>
-        <%--</td>--%>
-    <%--</tr>--%>
-<%--</table>--%>
 
 </body>
 </html>

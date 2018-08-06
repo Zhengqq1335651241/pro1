@@ -5,9 +5,11 @@
     <insert id="addEmp" parameterType="Emp">
         INSERT INTO T_EMP(E_EID, E_ENAME, E_EPASS, E_SEX, E_ADDRESS, E_EDUBACKGROUND, E_BIRTHDAY,
          E_HOMETOWN,E_PHONE, E_EMAIL, E_MAJOR, E_GRADUATESCHOOL, E_DEPTID, E_PID,E_STATE,E_HIREDATE)
-        VALUES (EMP_SEQ.nextval,#{e_eName},#{e_ePass},#{e_sex},#{e_address},#{e_eduBackground},#{e_birthday},
-        #{e_hometown},#{e_phone},#{e_email},#{e_major},#{e_graduateSchool},
-        #{e_deptId},#{e_pId},#{e_state},#{e_hireDate})
+        VALUES (EMP_SEQ.nextval,#{e_eName,jdbcType=VARCHAR},#{e_ePass,jdbcType=VARCHAR},#{e_sex,jdbcType=VARCHAR},
+        #{e_address,jdbcType=VARCHAR},#{e_eduBackground,jdbcType=VARCHAR},#{e_birthday,jdbcType=VARCHAR},
+        #{e_hometown,jdbcType=VARCHAR},#{e_phone,jdbcType=VARCHAR},#{e_email,jdbcType=VARCHAR},
+        #{e_major,jdbcType=VARCHAR},#{e_graduateSchool,jdbcType=VARCHAR},#{e_deptId,jdbcType=NUMERIC},
+        #{e_pId,jdbcType=NUMERIC},#{e_state,jdbcType=NUMERIC},#{e_hireDate,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateEmp" parameterType="Emp">

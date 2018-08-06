@@ -23,7 +23,7 @@
     </delete>
 
     <select id="getByUidVitae" parameterType="Vitae" resultType="com.zhengtd.model.Vitae">
-        SELECT * FROM T_VITAE WHERE CV_UID=#{cv_uid} and cv_state=#{cv_state}
+        SELECT * FROM T_VITAE WHERE CV_UID=#{cv_uid}
     </select>
 
     <select id="getByIdVC" parameterType="Vitae" resultType="com.zhengtd.model.Vitae">

@@ -14,6 +14,8 @@ public interface RcvMapper {
     boolean addRcv(Rcv rcv);
     boolean deleteRcv(Rcv rcv);
     boolean updateRcv(Rcv rcv);
+    boolean deleteAllRcv();
+    boolean deleteUserRcv(Rcv rcv);
     List<Rcv> getByUIDAllRcv(Rcv rcv);
     List<Rcv> getPage(Map<String,Object> data);
     List<Rcv> getAllRcv();
